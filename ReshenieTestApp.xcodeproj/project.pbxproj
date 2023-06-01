@@ -9,21 +9,27 @@
 /* Begin PBXBuildFile section */
 		A34279802A288F010092C43E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A342797F2A288F010092C43E /* AppDelegate.swift */; };
 		A34279822A288F010092C43E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34279812A288F010092C43E /* SceneDelegate.swift */; };
-		A34279842A288F010092C43E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34279832A288F010092C43E /* ViewController.swift */; };
-		A34279872A288F010092C43E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A34279852A288F010092C43E /* Main.storyboard */; };
+		A34279842A288F010092C43E /* FilmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34279832A288F010092C43E /* FilmsViewController.swift */; };
 		A34279892A288F050092C43E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A34279882A288F050092C43E /* Assets.xcassets */; };
 		A342798C2A288F050092C43E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A342798A2A288F050092C43E /* LaunchScreen.storyboard */; };
+		A34279942A2897D90092C43E /* FilmsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34279932A2897D90092C43E /* FilmsView.swift */; };
+		A34279962A289DF00092C43E /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A34279952A289DEF0092C43E /* Roboto-Regular.ttf */; };
+		A342799B2A289F120092C43E /* UIFont+CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = A342799A2A289F120092C43E /* UIFont+CustomFont.swift */; };
+		A342799D2A28A0AA0092C43E /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A342799C2A28A0AA0092C43E /* Roboto-Medium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A342797C2A288F010092C43E /* ReshenieTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReshenieTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A342797F2A288F010092C43E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A34279812A288F010092C43E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A34279832A288F010092C43E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A34279862A288F010092C43E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A34279832A288F010092C43E /* FilmsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsViewController.swift; sourceTree = "<group>"; };
 		A34279882A288F050092C43E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A342798B2A288F050092C43E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A342798D2A288F050092C43E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A34279932A2897D90092C43E /* FilmsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsView.swift; sourceTree = "<group>"; };
+		A34279952A289DEF0092C43E /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "../../../../../Downloads/Roboto/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		A342799A2A289F120092C43E /* UIFont+CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+CustomFont.swift"; sourceTree = "<group>"; };
+		A342799C2A28A0AA0092C43E /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "../../../../../Downloads/Roboto/Roboto-Medium.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,26 @@
 		A342797E2A288F010092C43E /* ReshenieTestApp */ = {
 			isa = PBXGroup;
 			children = (
+				A34279992A289EE90092C43E /* Extension */,
 				A342797F2A288F010092C43E /* AppDelegate.swift */,
 				A34279812A288F010092C43E /* SceneDelegate.swift */,
-				A34279832A288F010092C43E /* ViewController.swift */,
-				A34279852A288F010092C43E /* Main.storyboard */,
+				A34279832A288F010092C43E /* FilmsViewController.swift */,
+				A34279932A2897D90092C43E /* FilmsView.swift */,
 				A34279882A288F050092C43E /* Assets.xcassets */,
 				A342798A2A288F050092C43E /* LaunchScreen.storyboard */,
 				A342798D2A288F050092C43E /* Info.plist */,
+				A34279952A289DEF0092C43E /* Roboto-Regular.ttf */,
+				A342799C2A28A0AA0092C43E /* Roboto-Medium.ttf */,
 			);
 			path = ReshenieTestApp;
+			sourceTree = "<group>";
+		};
+		A34279992A289EE90092C43E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				A342799A2A289F120092C43E /* UIFont+CustomFont.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,9 +142,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A342799D2A28A0AA0092C43E /* Roboto-Medium.ttf in Resources */,
+				A34279962A289DF00092C43E /* Roboto-Regular.ttf in Resources */,
 				A342798C2A288F050092C43E /* LaunchScreen.storyboard in Resources */,
 				A34279892A288F050092C43E /* Assets.xcassets in Resources */,
-				A34279872A288F010092C43E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +156,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A34279842A288F010092C43E /* ViewController.swift in Sources */,
+				A34279942A2897D90092C43E /* FilmsView.swift in Sources */,
+				A342799B2A289F120092C43E /* UIFont+CustomFont.swift in Sources */,
+				A34279842A288F010092C43E /* FilmsViewController.swift in Sources */,
 				A34279802A288F010092C43E /* AppDelegate.swift in Sources */,
 				A34279822A288F010092C43E /* SceneDelegate.swift in Sources */,
 			);
@@ -147,14 +167,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		A34279852A288F010092C43E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A34279862A288F010092C43E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A342798A2A288F050092C43E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -291,7 +303,6 @@
 				INFOPLIST_FILE = ReshenieTestApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -317,7 +328,6 @@
 				INFOPLIST_FILE = ReshenieTestApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
