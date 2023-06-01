@@ -8,16 +8,30 @@
 import UIKit
 
 final class FilmsView: UIView {
+    var tableViewDataSource: UITableViewDataSource? {
+        get {
+            tableView.dataSource
+        }
+        set {
+            tableView.dataSource = newValue
+        }
+    }
+    var tableViewDelegate: UITableViewDelegate? {
+        get {
+            tableView.delegate
+        }
+        set {
+            tableView.delegate = newValue
+        }
+    }
+    private let identifierCell: String
     private let tableView = UITableView()
     
-    private let tableViewDelegate: UITableViewDelegate
-    private let tableViewDataSource: UITableViewDataSource
-    
-    init(tableViewDelegate: UITableViewDelegate, tableViewDataSource: UITableViewDataSource) {
+    init(tableViewDataSource: UITableViewDataSource, tableViewDelegate: UITableViewDelegate, identifierCell: String) {
+        self.identifierCell = identifierCell
+        super.init(frame: .zero)
         self.tableViewDelegate = tableViewDelegate
         self.tableViewDataSource = tableViewDataSource
-        super.init(frame: .zero)
-        
         configureTableView()
     }
     
@@ -28,14 +42,15 @@ final class FilmsView: UIView {
     private func configureTableView() {
         tableView.delegate = tableViewDelegate
         tableView.dataSource = tableViewDataSource
+        tableView.register(FilmsCell.self, forCellReuseIdentifier: identifierCell)
         
         addSubview(tableView)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: topAnchor),
-            tableView.leftAnchor.constraint(equalTo: leftAnchor),
-            tableView.rightAnchor.constraint(equalTo: rightAnchor),
+            tableView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            tableView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
@@ -47,15 +62,10 @@ struct Genre {
 }
 
 final class FilmsCell: UITableViewCell {
-    private let iconView = UIImageView()
-    private let titleLabel = UILabel()
-    private let genreLabel = UILabel()
+    private var filmView: FilmView? = nil
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configureIconView()
-        configureTitleLabel()
-        configureGenreLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -63,12 +73,62 @@ final class FilmsCell: UITableViewCell {
     }
     
     func configureCell(title: String, genre: Genre, icon: UIImage) {
-        iconView.image = icon
-        titleLabel.text = title
-        genreLabel.text = "\(genre.name)" + " " + "(\(genre.year)"
+        let filmView = FilmView(title: title, genre: genre, icon: icon)
+        self.filmView = filmView
+        
+        backgroundColor = .none
+        
+        contentView.addSubview(filmView)
+        
+        filmView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            filmView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            filmView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
+            filmView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            filmView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10)
+        ])
+    }
+}
+
+final class FilmView: UIView {
+    private let title: String
+    private let genre: Genre
+    private let icon: UIImage
+    private let iconView = UIImageView()
+    private let titleLabel = UILabel()
+    private let genreLabel = UILabel()
+    
+    init(title: String, genre: Genre, icon: UIImage) {
+        self.title = title
+        self.genre = genre
+        self.icon = icon
+        super.init(frame: .zero)
+        
+        backgroundColor = .white
+        
+        configureIconView()
+        configureTitleLabel()
+        configureGenreLabel()
+        setupShadow()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupShadow() {
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 0)
+        layer.shadowOpacity = 0.2
+        layer.shadowRadius = 10
+        layer.masksToBounds = false
+        layer.cornerRadius = 8.0
     }
     
     private func configureIconView() {
+        iconView.image = icon
+        
         addSubview(iconView)
         
         iconView.translatesAutoresizingMaskIntoConstraints = false
@@ -80,6 +140,7 @@ final class FilmsCell: UITableViewCell {
     }
     
     private func configureTitleLabel() {
+        titleLabel.text = title
         titleLabel.font = UIFont.specialFont(size: 16, style: .medium)
         titleLabel.textColor = .black
         titleLabel.numberOfLines = 1
@@ -95,6 +156,7 @@ final class FilmsCell: UITableViewCell {
     }
     
     private func configureGenreLabel() {
+        genreLabel.text = "\(genre.name)" + " " + "(\(genre.year)"
         genreLabel.font = UIFont.specialFont(size: 14, style: .medium)
         genreLabel.textColor = .gray
         genreLabel.numberOfLines = 1
@@ -109,3 +171,4 @@ final class FilmsCell: UITableViewCell {
         ])
     }
 }
+

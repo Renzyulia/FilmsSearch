@@ -7,10 +7,27 @@
 
 import UIKit
 
-class FilmsViewController: UIViewController {
+class FilmsViewController: UIViewController, UITableViewDelegate {
+    private var filmTableViewDataSource: FilmsTableViewDataSource? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureNavigationBar()
+        view.backgroundColor = .white
+        
+        let filmTableDataSource = FilmsTableViewDataSource()
+        self.filmTableViewDataSource = filmTableDataSource
+        let filmsView = FilmsView(tableViewDataSource: filmTableDataSource, tableViewDelegate: filmTableDataSource, identifierCell: filmTableDataSource.reuseIdentifier)
+        
+        view.addSubview(filmsView)
+        filmsView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            filmsView.topAnchor.constraint(equalTo: view.topAnchor),
+            filmsView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            filmsView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            filmsView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     private func configureNavigationBar() {
@@ -37,7 +54,6 @@ class FilmsViewController: UIViewController {
         
         // MARK: - configure searchButton
         let searchButton = UIBarButtonItem(image: UIImage(named: "SearchIcon"), style: .plain, target: self, action: #selector(didTapSearchButton))
-        
         navigationItem.rightBarButtonItem = searchButton
     }
     
