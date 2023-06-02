@@ -11,6 +11,7 @@ class FilmsViewController: UIViewController, FilmsModelDelegate {
     private var filmsTableViewDataSource: FilmsTableViewDataSource? = nil
     private var filmsModel: FilmsModel? = nil
     private var filmsView: FilmView? = nil
+    private var loadingView: LoadingView? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,18 @@ class FilmsViewController: UIViewController, FilmsModelDelegate {
     }
     
     func showLoadingView() {
+        let loadingView = LoadingView()
+        self.loadingView = loadingView
         
+        view.addSubview(loadingView)
+        
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            loadingView.topAnchor.constraint(equalTo: view.topAnchor),
+            loadingView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            loadingView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            loadingView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     func showFilmsView(from data: [Info]) {
@@ -52,6 +64,9 @@ class FilmsViewController: UIViewController, FilmsModelDelegate {
     
     private func configureNavigationBar() {
         guard let navigationBar = navigationController?.navigationBar else { return }
+        // MARK: - configure background color
+        navigationBar.backgroundColor = .white
+        
         // MARK: - configure title
         let titleLabel = UILabel()
         let title = NSAttributedString(
@@ -73,7 +88,8 @@ class FilmsViewController: UIViewController, FilmsModelDelegate {
         ])
         
         // MARK: - configure searchButton
-        let searchButton = UIBarButtonItem(image: UIImage(named: "SearchIcon"), style: .plain, target: self, action: #selector(didTapSearchButton))
+        let searchIcon = UIImage(named: "SearchIcon")?.withTintColor(UIColor(named: "CustomColor")!, renderingMode: .alwaysOriginal)
+        let searchButton = UIBarButtonItem(image: searchIcon, style: .plain, target: self, action: #selector(didTapSearchButton))
         navigationItem.rightBarButtonItem = searchButton
     }
     
