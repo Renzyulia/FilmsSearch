@@ -22,21 +22,21 @@ class FilmsViewController: UIViewController, FilmsModelDelegate {
         self.filmsModel = filmsModel
         filmsModel.delegate = self
         
-        viewDidLoad()
+        filmsModel.viewDidLoad()
     }
     
     func showLoadingView() {
-        //показать окно загрузки 
+        
     }
     
     func showFilmsView(from data: [Info]) {
         let filmsTableViewDataSource = FilmsTableViewDataSource(films: data)
         self.filmsTableViewDataSource = filmsTableViewDataSource
-        
+
         let filmsView = FilmsView(tableViewDataSource: filmsTableViewDataSource, tableViewDelegate: filmsTableViewDataSource, identifierCell: filmsTableViewDataSource.reuseIdentifier)
-        
+
         view.addSubview(filmsView)
-        
+
         filmsView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             filmsView.topAnchor.constraint(equalTo: view.topAnchor),

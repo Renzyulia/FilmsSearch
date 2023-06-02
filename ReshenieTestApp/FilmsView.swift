@@ -49,8 +49,8 @@ final class FilmsView: UIView {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: topAnchor),
-            tableView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
-            tableView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            tableView.leftAnchor.constraint(equalTo: leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: rightAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
@@ -83,10 +83,10 @@ final class FilmsCell: UITableViewCell {
         filmView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            filmView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            filmView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
-            filmView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            filmView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10)
+            filmView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 7),
+            filmView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 15),
+            filmView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -7),
+            filmView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -15)
         ])
     }
 }
@@ -120,19 +120,21 @@ final class FilmView: UIView {
     private func setupShadow() {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 0)
-        layer.shadowOpacity = 0.2
+        layer.shadowOpacity = 0.4
         layer.shadowRadius = 10
         layer.masksToBounds = false
-        layer.cornerRadius = 8.0
+        layer.cornerRadius = 15.0
     }
     
     private func configureIconView() {
         iconView.loadImage(with: iconUrl)
+        iconView.contentMode = .scaleAspectFit
         
         addSubview(iconView)
         
         iconView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            iconView.widthAnchor.constraint(equalToConstant: 40),
             iconView.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             iconView.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
             iconView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15)
@@ -156,7 +158,7 @@ final class FilmView: UIView {
     }
     
     private func configureGenreLabel() {
-        genreLabel.text = "\(genre.name)" + " " + "(\(genre.year)"
+        genreLabel.text = "\(genre.name)" + " " + "(\(genre.year))"
         genreLabel.font = UIFont.specialFont(size: 14, style: .medium)
         genreLabel.textColor = .gray
         genreLabel.numberOfLines = 1
@@ -167,7 +169,7 @@ final class FilmView: UIView {
         NSLayoutConstraint.activate([
             genreLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             genreLabel.leftAnchor.constraint(equalTo: iconView.rightAnchor, constant: 15),
-            genreLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -27)
+            genreLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -50)
         ])
     }
 }

@@ -21,6 +21,7 @@
 		A3BB8C152A29F5D5000A6D0D /* ResponseStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB8C142A29F5D5000A6D0D /* ResponseStructure.swift */; };
 		A3BB8C172A2A09D2000A6D0D /* UIImageView+loadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB8C162A2A09D2000A6D0D /* UIImageView+loadImage.swift */; };
 		A3BB8C1A2A2A0A07000A6D0D /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB8C192A2A0A07000A6D0D /* ImageManager.swift */; };
+		A3F180A32A2A2299005E9D60 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F180A22A2A2299005E9D60 /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		A3BB8C142A29F5D5000A6D0D /* ResponseStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseStructure.swift; sourceTree = "<group>"; };
 		A3BB8C162A2A09D2000A6D0D /* UIImageView+loadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+loadImage.swift"; sourceTree = "<group>"; };
 		A3BB8C192A2A0A07000A6D0D /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		A3F180A22A2A2299005E9D60 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				A34279A22A28C7810092C43E /* Roboto-Medium.ttf */,
 				A34279A42A28C78E0092C43E /* Roboto-Regular.ttf */,
 				A3BB8C142A29F5D5000A6D0D /* ResponseStructure.swift */,
+				A3F180A22A2A2299005E9D60 /* LoadingView.swift */,
 			);
 			path = ReshenieTestApp;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 				A34279942A2897D90092C43E /* FilmsView.swift in Sources */,
 				A3BB8C1A2A2A0A07000A6D0D /* ImageManager.swift in Sources */,
 				A342799B2A289F120092C43E /* UIFont+CustomFont.swift in Sources */,
+				A3F180A32A2A2299005E9D60 /* LoadingView.swift in Sources */,
 				A34279842A288F010092C43E /* FilmsViewController.swift in Sources */,
 				A342799F2A28B7A20092C43E /* FilmsModel.swift in Sources */,
 				A3BB8C152A29F5D5000A6D0D /* ResponseStructure.swift in Sources */,

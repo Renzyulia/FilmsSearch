@@ -32,6 +32,6 @@ final class FilmsTableViewDataSource: NSObject, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 93
+        return 113
     }
 }
