@@ -22,8 +22,8 @@ final class LoadingView: UIView {
     
     private func configureLoadingView() {
         loadingView.image = UIImage(named: "LoadingIcon")
-        loadingView.tintColor = UIColor(named: "CustomColor")
-        loadingView.transform = loadingView.transform.rotated(by: 1.2.degreesToRadians)
+        loadingView.tintColor = .black
+        loadingView.rotateView()
         
         addSubview(loadingView)
         

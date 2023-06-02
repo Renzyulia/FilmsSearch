@@ -25,14 +25,23 @@ final class FilmsModel {
       
         URLSession.shared.dataTask(with: request, completionHandler: { [weak self] data, response, error -> Void in
           do {
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    self?.delegate?.showLoadingErrorView()
+                }
+                return
+            }
+              
             let jsonDecoder = JSONDecoder()
-            let responseModel = try jsonDecoder.decode(Model.self, from: data!)
+            let responseModel = try jsonDecoder.decode(Model.self, from: data)
             
             DispatchQueue.main.async {
                 self?.delegate?.showFilmsView(from: responseModel.items)
             }
           } catch {
-              self?.delegate?.showLoadingErrorView()
+              DispatchQueue.main.async {
+                  self?.delegate?.showLoadingErrorView()
+              }
             }
         }).resume()
     }

@@ -12,6 +12,7 @@ class FilmsViewController: UIViewController, FilmsModelDelegate {
     private var filmsModel: FilmsModel? = nil
     private var filmsView: FilmView? = nil
     private var loadingView: LoadingView? = nil
+    private var loadingErrorView: LoadingErrorView? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,7 @@ class FilmsViewController: UIViewController, FilmsModelDelegate {
         let filmsModel = FilmsModel()
         self.filmsModel = filmsModel
         filmsModel.delegate = self
-        
+
         filmsModel.viewDidLoad()
     }
     
@@ -34,7 +35,7 @@ class FilmsViewController: UIViewController, FilmsModelDelegate {
         
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            loadingView.topAnchor.constraint(equalTo: view.topAnchor),
+            loadingView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             loadingView.leftAnchor.constraint(equalTo: view.leftAnchor),
             loadingView.rightAnchor.constraint(equalTo: view.rightAnchor),
             loadingView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -51,7 +52,7 @@ class FilmsViewController: UIViewController, FilmsModelDelegate {
 
         filmsView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            filmsView.topAnchor.constraint(equalTo: view.topAnchor),
+            filmsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             filmsView.leftAnchor.constraint(equalTo: view.leftAnchor),
             filmsView.rightAnchor.constraint(equalTo: view.rightAnchor),
             filmsView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -59,7 +60,19 @@ class FilmsViewController: UIViewController, FilmsModelDelegate {
     }
     
     func showLoadingErrorView() {
-        //показать ошибку загрузки данных
+        let loadingErrorView = LoadingErrorView()
+        self.loadingErrorView = loadingErrorView
+        
+        loadingView?.removeFromSuperview() // ??
+        view.addSubview(loadingErrorView)
+        
+        loadingErrorView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            loadingErrorView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            loadingErrorView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            loadingErrorView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            loadingErrorView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     private func configureNavigationBar() {
