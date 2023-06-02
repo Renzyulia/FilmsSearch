@@ -56,7 +56,7 @@ final class FilmsView: UIView {
     }
 }
 
-struct Genre {
+struct FilmGenre {
     let name: String
     let year: Int
 }
@@ -72,8 +72,8 @@ final class FilmsCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(title: String, genre: Genre, icon: UIImage) {
-        let filmView = FilmView(title: title, genre: genre, icon: icon)
+    func configureCell(title: String, genre: FilmGenre, iconUrl: URL) {
+        let filmView = FilmView(title: title, genre: genre, iconUrl: iconUrl)
         self.filmView = filmView
         
         backgroundColor = .none
@@ -93,16 +93,16 @@ final class FilmsCell: UITableViewCell {
 
 final class FilmView: UIView {
     private let title: String
-    private let genre: Genre
-    private let icon: UIImage
+    private let genre: FilmGenre
+    private let iconUrl: URL
     private let iconView = UIImageView()
     private let titleLabel = UILabel()
     private let genreLabel = UILabel()
     
-    init(title: String, genre: Genre, icon: UIImage) {
+    init(title: String, genre: FilmGenre, iconUrl: URL) {
         self.title = title
         self.genre = genre
-        self.icon = icon
+        self.iconUrl = iconUrl
         super.init(frame: .zero)
         
         backgroundColor = .white
@@ -127,7 +127,7 @@ final class FilmView: UIView {
     }
     
     private func configureIconView() {
-        iconView.image = icon
+        iconView.loadImage(with: iconUrl)
         
         addSubview(iconView)
         

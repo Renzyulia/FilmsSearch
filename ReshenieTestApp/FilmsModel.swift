@@ -8,5 +8,38 @@
 import UIKit
 
 final class FilmsModel {
+    weak var delegate: FilmsModelDelegate?
+    private let apiKey = "fb5368f8-d311-48d9-aadf-c3bd71bda8c5"
+    private let requestURL = "https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres?year=2023&month=JUNE"
     
+    func viewDidLoad() {
+        delegate?.showLoadingView()
+        getListOfFilms()
+    }
+    
+    private func getListOfFilms() {
+        var request = URLRequest(url: URL(string: requestURL)!)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(apiKey, forHTTPHeaderField: "X-API-KEY")
+      
+        URLSession.shared.dataTask(with: request, completionHandler: { [weak self] data, response, error -> Void in
+          do {
+            let jsonDecoder = JSONDecoder()
+            let responseModel = try jsonDecoder.decode(Model.self, from: data!)
+            
+            DispatchQueue.main.async {
+                self?.delegate?.showFilmsView(from: responseModel.items)
+            }
+          } catch {
+              self?.delegate?.showLoadingErrorView()
+            }
+        }).resume()
+    }
+}
+
+protocol FilmsModelDelegate: AnyObject {
+    func showLoadingView()
+    func showFilmsView(from data: [Info])
+    func showLoadingErrorView()
 }

@@ -7,8 +7,10 @@
 
 import UIKit
 
-class FilmsViewController: UIViewController, UITableViewDelegate {
-    private var filmTableViewDataSource: FilmsTableViewDataSource? = nil
+class FilmsViewController: UIViewController, FilmsModelDelegate {
+    private var filmsTableViewDataSource: FilmsTableViewDataSource? = nil
+    private var filmsModel: FilmsModel? = nil
+    private var filmsView: FilmView? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,11 +18,25 @@ class FilmsViewController: UIViewController, UITableViewDelegate {
         configureNavigationBar()
         view.backgroundColor = .white
         
-        let filmTableDataSource = FilmsTableViewDataSource()
-        self.filmTableViewDataSource = filmTableDataSource
-        let filmsView = FilmsView(tableViewDataSource: filmTableDataSource, tableViewDelegate: filmTableDataSource, identifierCell: filmTableDataSource.reuseIdentifier)
+        let filmsModel = FilmsModel()
+        self.filmsModel = filmsModel
+        filmsModel.delegate = self
+        
+        viewDidLoad()
+    }
+    
+    func showLoadingView() {
+        //показать окно загрузки 
+    }
+    
+    func showFilmsView(from data: [Info]) {
+        let filmsTableViewDataSource = FilmsTableViewDataSource(films: data)
+        self.filmsTableViewDataSource = filmsTableViewDataSource
+        
+        let filmsView = FilmsView(tableViewDataSource: filmsTableViewDataSource, tableViewDelegate: filmsTableViewDataSource, identifierCell: filmsTableViewDataSource.reuseIdentifier)
         
         view.addSubview(filmsView)
+        
         filmsView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             filmsView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -28,6 +44,10 @@ class FilmsViewController: UIViewController, UITableViewDelegate {
             filmsView.rightAnchor.constraint(equalTo: view.rightAnchor),
             filmsView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    func showLoadingErrorView() {
+        //показать ошибку загрузки данных
     }
     
     private func configureNavigationBar() {
