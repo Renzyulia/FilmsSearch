@@ -12,6 +12,7 @@ extension UIFont {
         switch style {
         case .regular: return UIFont(name: "Roboto-Regular", size: size)!
         case .medium: return UIFont(name: "Roboto-Medium", size: size)!
+        case .bold: return UIFont(name: "Roboto-Black", size: size)!
         }
     }
 }
@@ -19,4 +20,5 @@ extension UIFont {
 enum Style {
     case regular
     case medium
+    case bold
 }
