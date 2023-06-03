@@ -8,7 +8,7 @@
 import UIKit
 
 final class FilmReviewModel {
-    weak var delagate: FilmReviewModelDelegate?
+    weak var delegate: FilmReviewModelDelegate?
     
     private let filmID: Int
     private let apiKey = "fb5368f8-d311-48d9-aadf-c3bd71bda8c5"
@@ -20,7 +20,8 @@ final class FilmReviewModel {
     }
     
     func viewDidLoad() {
-        delagate?.showLoadingView()
+        delegate?.showLoadingView()
+        getFilmData()
     }
     
     private func getFilmData() {
@@ -33,20 +34,37 @@ final class FilmReviewModel {
           do {
             guard let data = data else {
                 DispatchQueue.main.async {
-//                    self?.delegate?.showLoadingErrorView()
+                    self?.delegate?.showLoadingErrorView()
                 }
                 return
             }
               
             let jsonDecoder = JSONDecoder()
-            let responseModel = try jsonDecoder.decode(Model.self, from: data)
+            let responseModel = try jsonDecoder.decode(Review.self, from: data)
             
             DispatchQueue.main.async {
-//                self?.delegate?.showFilmsView(from: responseModel.items)
+                var listGenres = [String]()
+                var countries = [String]()
+                
+                for genre in responseModel.genres {
+                    listGenres.append(genre.genre)
+                }
+                
+                for country in responseModel.countries {
+                    countries.append(country.country)
+                }
+                
+                self?.delegate?.showReviewView(
+                    posterUrl: responseModel.posterUrl,
+                    title: responseModel.nameRu,
+                    review: responseModel.description,
+                    genres: listGenres,
+                    countries: countries,
+                    year: responseModel.year)
             }
           } catch {
               DispatchQueue.main.async {
-//                  self?.delegate?.showLoadingErrorView()
+                  self?.delegate?.showLoadingErrorView()
               }
             }
         }).resume()
@@ -55,4 +73,6 @@ final class FilmReviewModel {
 
 protocol FilmReviewModelDelegate: AnyObject {
     func showLoadingView()
+    func showReviewView(posterUrl: URL, title: String, review: String, genres: [String], countries: [String], year: Int)
+    func showLoadingErrorView()
 }

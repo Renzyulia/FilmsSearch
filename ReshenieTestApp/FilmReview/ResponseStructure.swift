@@ -12,11 +12,11 @@ struct Review: Decodable {
     let posterUrl: URL
     let year: Int
     let description: String
-    let countries: [Country]
+    let countries: [Countries]
     let genres: [ListGenres]
 }
 
-struct Country: Decodable {
+struct Countries: Decodable {
     let country: String
 }
 

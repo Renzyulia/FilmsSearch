@@ -8,14 +8,12 @@
 import UIKit
 
 final class FilmReviewViewController: UIViewController, FilmReviewModelDelegate {
-    func showLoadingView() {
-        <#code#>
-    }
-    
     let filmID: Int
     
     private var filmReviewModel: FilmReviewModel? = nil
     private var filmReviewView: FilmReviewView? = nil
+    private var loadingView: LoadingView? = nil
+    private var loadingErrorView: LoadingErrorView? = nil
     
     init(filmID: Int) {
         self.filmID = filmID
@@ -29,10 +27,61 @@ final class FilmReviewViewController: UIViewController, FilmReviewModelDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureNavigationBar()
+        
         let filmReviewModel = FilmReviewModel(filmID: filmID)
         self.filmReviewModel = filmReviewModel
-        filmReviewModel.delagate = self
+        filmReviewModel.delegate = self
         
         filmReviewModel.viewDidLoad()
+    }
+    
+    func showLoadingView() {
+        let loadingView = LoadingView()
+        self.loadingView = loadingView
+        
+        view.addSubview(loadingView)
+
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            loadingView.topAnchor.constraint(equalTo: view.topAnchor),
+            loadingView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            loadingView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            loadingView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    func showLoadingErrorView() {
+        let loadingErrorView = LoadingErrorView()
+        self.loadingErrorView = loadingErrorView
+        
+        view.addSubview(loadingErrorView)
+        
+        loadingErrorView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            loadingErrorView.topAnchor.constraint(equalTo: view.topAnchor),
+            loadingErrorView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            loadingErrorView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            loadingErrorView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    func showReviewView(posterUrl: URL, title: String, review: String, genres: [String], countries: [String], year: Int) {
+        let filmReviewView = FilmReviewView(posterUrl: posterUrl, titleFilm: title, reviewFilm: review, genres: genres, countries: countries, year: year)
+        self.filmReviewView = filmReviewView
+        
+        view.addSubview(filmReviewView)
+        
+        filmReviewView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            filmReviewView.topAnchor.constraint(equalTo: view.topAnchor),
+            filmReviewView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            filmReviewView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            filmReviewView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    private func configureNavigationBar() {
+        navigationItem.backButtonDisplayMode = .minimal
     }
 }
