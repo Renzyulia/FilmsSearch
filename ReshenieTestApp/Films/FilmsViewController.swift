@@ -8,9 +8,9 @@
 import UIKit
 
 class FilmsViewController: UIViewController, FilmsModelDelegate {
-    private var filmsTableViewDataSource: FilmsTableViewDataSource? = nil
     private var filmsModel: FilmsModel? = nil
     private var filmsView: FilmView? = nil
+    private var filmsTableViewDataSource: FilmsTableViewDataSource? = nil
     private var loadingView: LoadingView? = nil
     private var loadingErrorView: LoadingErrorView? = nil
 
