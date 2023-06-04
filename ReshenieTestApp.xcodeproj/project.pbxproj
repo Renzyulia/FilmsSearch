@@ -7,23 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A30CB3B12A2B452D00700827 /* ResponseStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30CB3B02A2B452D00700827 /* ResponseStructure.swift */; };
+		A30CB3B12A2B452D00700827 /* ResponseStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30CB3B02A2B452D00700827 /* ResponseStruct.swift */; };
 		A337AD1E2A2B2C550046FE9C /* FilmReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337AD1D2A2B2C550046FE9C /* FilmReviewView.swift */; };
-		A337AD202A2B31A60046FE9C /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A337AD1F2A2B31A60046FE9C /* Roboto-Black.ttf */; };
 		A337AD222A2B3F350046FE9C /* FilmReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337AD212A2B3F350046FE9C /* FilmReviewViewController.swift */; };
 		A337AD242A2B40390046FE9C /* FilmReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337AD232A2B40390046FE9C /* FilmReviewModel.swift */; };
-		A337AD262A2B41940046FE9C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337AD252A2B41940046FE9C /* Constants.swift */; };
 		A34279802A288F010092C43E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A342797F2A288F010092C43E /* AppDelegate.swift */; };
 		A34279822A288F010092C43E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34279812A288F010092C43E /* SceneDelegate.swift */; };
 		A34279842A288F010092C43E /* FilmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34279832A288F010092C43E /* FilmsViewController.swift */; };
 		A34279892A288F050092C43E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A34279882A288F050092C43E /* Assets.xcassets */; };
-		A342798C2A288F050092C43E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A342798A2A288F050092C43E /* LaunchScreen.storyboard */; };
 		A34279942A2897D90092C43E /* FilmsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34279932A2897D90092C43E /* FilmsView.swift */; };
 		A342799B2A289F120092C43E /* UIFont+CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = A342799A2A289F120092C43E /* UIFont+CustomFont.swift */; };
 		A342799F2A28B7A20092C43E /* FilmsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A342799E2A28B7A20092C43E /* FilmsModel.swift */; };
 		A34279A12A28B7F80092C43E /* FilmsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34279A02A28B7F80092C43E /* FilmsTableViewDataSource.swift */; };
 		A34279A32A28C7810092C43E /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A34279A22A28C7810092C43E /* Roboto-Medium.ttf */; };
 		A34279A52A28C78E0092C43E /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A34279A42A28C78E0092C43E /* Roboto-Regular.ttf */; };
+		A37F15B92A2B68870064A209 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A37F15B82A2B684E0064A209 /* Roboto-Black.ttf */; };
 		A3BB8C152A29F5D5000A6D0D /* ResponseStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB8C142A29F5D5000A6D0D /* ResponseStructure.swift */; };
 		A3BB8C172A2A09D2000A6D0D /* UIImageView+loadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB8C162A2A09D2000A6D0D /* UIImageView+loadImage.swift */; };
 		A3BB8C1A2A2A0A07000A6D0D /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB8C192A2A0A07000A6D0D /* ImageManager.swift */; };
@@ -33,12 +31,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A30CB3B02A2B452D00700827 /* ResponseStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseStructure.swift; sourceTree = "<group>"; };
+		A30CB3B02A2B452D00700827 /* ResponseStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseStruct.swift; sourceTree = "<group>"; };
 		A337AD1D2A2B2C550046FE9C /* FilmReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmReviewView.swift; sourceTree = "<group>"; };
-		A337AD1F2A2B31A60046FE9C /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Black.ttf"; path = "../../../../../Downloads/Roboto/Roboto-Black.ttf"; sourceTree = "<group>"; };
 		A337AD212A2B3F350046FE9C /* FilmReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmReviewViewController.swift; sourceTree = "<group>"; };
 		A337AD232A2B40390046FE9C /* FilmReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmReviewModel.swift; sourceTree = "<group>"; };
-		A337AD252A2B41940046FE9C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A342797C2A288F010092C43E /* ReshenieTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReshenieTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A342797F2A288F010092C43E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A34279812A288F010092C43E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +48,7 @@
 		A34279A02A28B7F80092C43E /* FilmsTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsTableViewDataSource.swift; sourceTree = "<group>"; };
 		A34279A22A28C7810092C43E /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "Roboto/Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		A34279A42A28C78E0092C43E /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "Roboto/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		A37F15B82A2B684E0064A209 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Black.ttf"; path = "Roboto/Roboto-Black.ttf"; sourceTree = "<group>"; };
 		A3BB8C142A29F5D5000A6D0D /* ResponseStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseStructure.swift; sourceTree = "<group>"; };
 		A3BB8C162A2A09D2000A6D0D /* UIImageView+loadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+loadImage.swift"; sourceTree = "<group>"; };
 		A3BB8C192A2A0A07000A6D0D /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
@@ -86,7 +83,7 @@
 				A337AD1D2A2B2C550046FE9C /* FilmReviewView.swift */,
 				A337AD212A2B3F350046FE9C /* FilmReviewViewController.swift */,
 				A337AD232A2B40390046FE9C /* FilmReviewModel.swift */,
-				A30CB3B02A2B452D00700827 /* ResponseStructure.swift */,
+				A30CB3B02A2B452D00700827 /* ResponseStruct.swift */,
 			);
 			path = FilmReview;
 			sourceTree = "<group>";
@@ -122,8 +119,7 @@
 				A342798D2A288F050092C43E /* Info.plist */,
 				A34279A22A28C7810092C43E /* Roboto-Medium.ttf */,
 				A34279A42A28C78E0092C43E /* Roboto-Regular.ttf */,
-				A337AD1F2A2B31A60046FE9C /* Roboto-Black.ttf */,
-				A337AD252A2B41940046FE9C /* Constants.swift */,
+				A37F15B82A2B684E0064A209 /* Roboto-Black.ttf */,
 			);
 			path = ReshenieTestApp;
 			sourceTree = "<group>";
@@ -216,9 +212,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A342798C2A288F050092C43E /* LaunchScreen.storyboard in Resources */,
+				A37F15B92A2B68870064A209 /* Roboto-Black.ttf in Resources */,
 				A34279892A288F050092C43E /* Assets.xcassets in Resources */,
-				A337AD202A2B31A60046FE9C /* Roboto-Black.ttf in Resources */,
 				A34279A52A28C78E0092C43E /* Roboto-Regular.ttf in Resources */,
 				A34279A32A28C7810092C43E /* Roboto-Medium.ttf in Resources */,
 			);
@@ -232,7 +227,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A34279942A2897D90092C43E /* FilmsView.swift in Sources */,
-				A337AD262A2B41940046FE9C /* Constants.swift in Sources */,
 				A3F180A52A2A32F4005E9D60 /* UIImageView+rotateView.swift in Sources */,
 				A337AD222A2B3F350046FE9C /* FilmReviewViewController.swift in Sources */,
 				A3BB8C1A2A2A0A07000A6D0D /* ImageManager.swift in Sources */,
@@ -247,7 +241,7 @@
 				A34279822A288F010092C43E /* SceneDelegate.swift in Sources */,
 				A34279A12A28B7F80092C43E /* FilmsTableViewDataSource.swift in Sources */,
 				A337AD1E2A2B2C550046FE9C /* FilmReviewView.swift in Sources */,
-				A30CB3B12A2B452D00700827 /* ResponseStructure.swift in Sources */,
+				A30CB3B12A2B452D00700827 /* ResponseStruct.swift in Sources */,
 				A3BB8C172A2A09D2000A6D0D /* UIImageView+loadImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

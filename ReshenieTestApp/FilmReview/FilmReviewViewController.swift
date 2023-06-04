@@ -9,6 +9,7 @@ import UIKit
 
 final class FilmReviewViewController: UIViewController, FilmReviewModelDelegate {
     let filmID: Int
+    weak var delegate: FilmReviewViewControllerDelegate?
     
     private var filmReviewModel: FilmReviewModel? = nil
     private var filmReviewView: FilmReviewView? = nil
@@ -28,6 +29,7 @@ final class FilmReviewViewController: UIViewController, FilmReviewModelDelegate 
         super.viewDidLoad()
         
         configureNavigationBar()
+        view.backgroundColor = .white
         
         let filmReviewModel = FilmReviewModel(filmID: filmID)
         self.filmReviewModel = filmReviewModel
@@ -55,6 +57,7 @@ final class FilmReviewViewController: UIViewController, FilmReviewModelDelegate 
         let loadingErrorView = LoadingErrorView()
         self.loadingErrorView = loadingErrorView
         
+        loadingView?.removeFromSuperview()
         view.addSubview(loadingErrorView)
         
         loadingErrorView.translatesAutoresizingMaskIntoConstraints = false
@@ -66,10 +69,11 @@ final class FilmReviewViewController: UIViewController, FilmReviewModelDelegate 
         ])
     }
     
-    func showReviewView(posterUrl: URL, title: String, review: String, genres: [String], countries: [String], year: Int) {
+    func showFilmReviewView(posterUrl: URL, title: String, review: String, genres: [String], countries: [String], year: Int) {
         let filmReviewView = FilmReviewView(posterUrl: posterUrl, titleFilm: title, reviewFilm: review, genres: genres, countries: countries, year: year)
         self.filmReviewView = filmReviewView
         
+        loadingView?.removeFromSuperview()
         view.addSubview(filmReviewView)
         
         filmReviewView.translatesAutoresizingMaskIntoConstraints = false
@@ -81,7 +85,21 @@ final class FilmReviewViewController: UIViewController, FilmReviewModelDelegate 
         ])
     }
     
-    private func configureNavigationBar() {
-        navigationItem.backButtonDisplayMode = .minimal
+    func notifyCompletion() {
+        delegate?.onFinish()
     }
+    
+    private func configureNavigationBar() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(didTapBackButton))
+        
+        navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "CustomColor")
+    }
+    
+    @objc private func didTapBackButton() {
+        filmReviewModel?.didTapBackButton()
+    }
+}
+
+protocol FilmReviewViewControllerDelegate: AnyObject {
+    func onFinish()
 }

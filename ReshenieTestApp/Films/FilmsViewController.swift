@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FilmsViewController: UIViewController, FilmsModelDelegate {
+class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewDataSourceDelegate, FilmReviewViewControllerDelegate {
     private var filmsModel: FilmsModel? = nil
     private var filmsView: FilmView? = nil
     private var filmsTableViewDataSource: FilmsTableViewDataSource? = nil
@@ -45,6 +45,7 @@ class FilmsViewController: UIViewController, FilmsModelDelegate {
     func showFilmsView(from data: [Info]) {
         let filmsTableViewDataSource = FilmsTableViewDataSource(films: data)
         self.filmsTableViewDataSource = filmsTableViewDataSource
+        filmsTableViewDataSource.delegate = self
 
         let filmsView = FilmsView(tableViewDataSource: filmsTableViewDataSource, tableViewDelegate: filmsTableViewDataSource, identifierCell: filmsTableViewDataSource.reuseIdentifier)
 
@@ -75,11 +76,22 @@ class FilmsViewController: UIViewController, FilmsModelDelegate {
         ])
     }
     
-    private func configureNavigationBar() {
-        guard let navigationBar = navigationController?.navigationBar else { return }
-        // MARK: - configure background color
-        navigationBar.backgroundColor = .white
+    func didTapFilmAt(id: Int) {
+        filmsModel?.didTapFilmAt(id: id)
+    }
+    
+    func showFilmReviewView(id: Int) {
+        let filmReviewViewController = FilmReviewViewController(filmID: id)
+        filmReviewViewController.delegate = self
         
+        navigationController?.pushViewController(filmReviewViewController, animated: false)
+    }
+    
+    func onFinish() {
+        navigationController?.popViewController(animated: false)
+    }
+    
+    private func configureNavigationBar() {
         // MARK: - configure title
         let titleLabel = UILabel()
         let title = NSAttributedString(
@@ -91,14 +103,8 @@ class FilmsViewController: UIViewController, FilmsModelDelegate {
         )
         
         titleLabel.attributedText = title
-        titleLabel.textAlignment = .left
         
-        navigationBar.addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            titleLabel.leftAnchor.constraint(equalTo: navigationBar.leftAnchor, constant: 16),
-            titleLabel.bottomAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: -5)
-        ])
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
         
         // MARK: - configure searchButton
         let searchIcon = UIImage(named: "SearchIcon")?.withTintColor(UIColor(named: "CustomColor")!, renderingMode: .alwaysOriginal)

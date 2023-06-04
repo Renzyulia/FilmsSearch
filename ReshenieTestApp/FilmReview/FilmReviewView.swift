@@ -33,6 +33,11 @@ final class FilmReviewView: UIView {
         self.countries = countries
         self.year = year
         super.init(frame: .zero)
+        
+        configureScrollView()
+        configurePosterView()
+        configureTitleAndReviewLabels()
+        configureGenresAndCountriesAndYearLabels()
     }
     
     required init?(coder: NSCoder) {
@@ -41,7 +46,7 @@ final class FilmReviewView: UIView {
     
     private func configureScrollView() {
         scrollView.backgroundColor = UIColor(named: "BackgroundColor")
-        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        scrollView.contentInsetAdjustmentBehavior = .never
         
         addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -65,23 +70,24 @@ final class FilmReviewView: UIView {
     
     private func configurePosterView() {
         posterView.loadImage(with: posterUrl)
-        posterView.contentMode = .scaleAspectFit
+        posterView.contentMode = .scaleAspectFill
+        posterView.clipsToBounds = true
         
         contentView.addSubview(posterView)
         
         posterView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            posterView.heightAnchor.constraint(equalTo: posterView.widthAnchor, multiplier: 4 / 2.85),
             posterView.topAnchor.constraint(equalTo: contentView.topAnchor),
             posterView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            posterView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
-            posterView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -247)
+            posterView.rightAnchor.constraint(equalTo: contentView.rightAnchor)
         ])
     }
     
     private func configureTitleAndReviewLabels() {
         stack.alignment = .leading
         stack.axis = .vertical
-        stack.spacing = 52
+        stack.spacing = 11
         
         titleLabel.text = titleFilm
         titleLabel.textColor = .black
@@ -90,6 +96,7 @@ final class FilmReviewView: UIView {
         reviewLabel.text = reviewFilm
         reviewLabel.textColor = .gray
         reviewLabel.font = UIFont.specialFont(size: 14, style: .regular)
+        reviewLabel.numberOfLines = 0
         
         stack.addArrangedSubview(titleLabel)
         stack.addArrangedSubview(reviewLabel)
@@ -98,7 +105,7 @@ final class FilmReviewView: UIView {
         
         stack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stack.topAnchor.constraint(equalTo: posterView.bottomAnchor, constant: 20),
+            stack.topAnchor.constraint(equalTo: posterView.bottomAnchor, constant: 15),
             stack.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 30),
             stack.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -30)
         ])
@@ -122,25 +129,16 @@ final class FilmReviewView: UIView {
         
         secondStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            secondStack.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 15),
+            secondStack.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 10),
             secondStack.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 30),
-            secondStack.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -30)
+            secondStack.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -30),
+            secondStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24)
         ])
     }
     
     private func configureGenresLabel() {
-        var genres: String {
-            var genres = ""
-            
-            for genre in genres {
-                genres.append(contentsOf: "\(genre), ")
-            }
-            
-            return genres
-        }
-        
         let listGenres = NSMutableAttributedString(
-            string: "Жанры",
+            string: "Жанры: ",
             attributes: [
                 .font: UIFont.specialFont(size: 14, style: .medium),
                 .foregroundColor: UIColor.gray
@@ -148,7 +146,7 @@ final class FilmReviewView: UIView {
         )
         
         let secondPart = NSAttributedString(
-            string: "\(genres)",
+            string: "\(genres.joined(separator: ", "))",
             attributes: [
                 .font: UIFont.specialFont(size: 14, style: .regular),
                 .foregroundColor: UIColor.gray
@@ -156,23 +154,12 @@ final class FilmReviewView: UIView {
         )
         
         listGenres.append(secondPart)
-        
         genresLabel.attributedText = listGenres
     }
     
     private func configureCountriesLabel() {
-        var countries: String {
-            var countries = ""
-            
-            for country in countries {
-                countries.append(contentsOf: "\(country), ")
-            }
-            
-            return countries
-        }
-        
         let listCountries = NSMutableAttributedString(
-            string: "Страны",
+            string: "Страны: ",
             attributes: [
                 .font: UIFont.specialFont(size: 14, style: .medium),
                 .foregroundColor: UIColor.gray
@@ -180,7 +167,7 @@ final class FilmReviewView: UIView {
         )
         
         let secondPart = NSAttributedString(
-            string: "\(countries)",
+            string: "\(countries.joined(separator: ", "))",
             attributes: [
                 .font: UIFont.specialFont(size: 14, style: .regular),
                 .foregroundColor: UIColor.gray
@@ -188,13 +175,12 @@ final class FilmReviewView: UIView {
         )
         
         listCountries.append(secondPart)
-        
         countriesLabel.attributedText = listCountries
     }
     
     private func configureYearLabel() {
         let year = NSMutableAttributedString(
-            string: "Год",
+            string: "Год: ",
             attributes: [
                 .font: UIFont.specialFont(size: 14, style: .medium),
                 .foregroundColor: UIColor.gray
@@ -210,7 +196,6 @@ final class FilmReviewView: UIView {
         )
         
         year.append(secondPart)
-        
         yearLabel.attributedText = year
     }
 }

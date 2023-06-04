@@ -8,7 +8,9 @@
 import UIKit
 
 final class FilmsTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
+    weak var delegate: FilmsTableViewDataSourceDelegate?
     let reuseIdentifier = "Cell"
+    
     private let films: [Info]
 
     init(films: [Info]) {
@@ -34,4 +36,13 @@ final class FilmsTableViewDataSource: NSObject, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 113
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let id = films[indexPath.row].kinopoiskId
+        delegate?.didTapFilmAt(id: id)
+    }
+}
+
+protocol FilmsTableViewDataSourceDelegate: AnyObject {
+    func didTapFilmAt(id: Int)
 }

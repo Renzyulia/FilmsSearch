@@ -16,7 +16,6 @@ final class FilmReviewModel {
     
     init(filmID: Int) {
         self.filmID = filmID
-        requestURL = "\(requestURL) + \(filmID)"
     }
     
     func viewDidLoad() {
@@ -24,8 +23,12 @@ final class FilmReviewModel {
         getFilmData()
     }
     
+    func didTapBackButton() {
+        delegate?.notifyCompletion()
+    }
+    
     private func getFilmData() {
-        var request = URLRequest(url: URL(string: requestURL)!)
+        var request = URLRequest(url: URL(string: "\(requestURL)" + "\(filmID)")!)
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue(apiKey, forHTTPHeaderField: "X-API-KEY")
@@ -54,7 +57,7 @@ final class FilmReviewModel {
                     countries.append(country.country)
                 }
                 
-                self?.delegate?.showReviewView(
+                self?.delegate?.showFilmReviewView(
                     posterUrl: responseModel.posterUrl,
                     title: responseModel.nameRu,
                     review: responseModel.description,
@@ -73,6 +76,7 @@ final class FilmReviewModel {
 
 protocol FilmReviewModelDelegate: AnyObject {
     func showLoadingView()
-    func showReviewView(posterUrl: URL, title: String, review: String, genres: [String], countries: [String], year: Int)
+    func showFilmReviewView(posterUrl: URL, title: String, review: String, genres: [String], countries: [String], year: Int)
     func showLoadingErrorView()
+    func notifyCompletion()
 }
