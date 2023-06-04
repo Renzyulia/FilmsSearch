@@ -21,6 +21,10 @@ final class FilmsModel {
         delegate?.showFilmReviewView(id: id)
     }
     
+    func didTapSearchButton() {
+        delegate?.showSearchView()
+    }
+    
     private func getListOfFilms() {
         var request = URLRequest(url: URL(string: requestURL)!)
         request.httpMethod = "GET"
@@ -56,4 +60,5 @@ protocol FilmsModelDelegate: AnyObject {
     func showFilmsView(from data: [Info])
     func showLoadingErrorView()
     func showFilmReviewView(id: Int)
+    func showSearchView()
 }

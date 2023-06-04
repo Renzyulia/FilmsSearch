@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewDataSourceDelegate, FilmReviewViewControllerDelegate {
+class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewDataSourceDelegate, FilmReviewViewControllerDelegate, FilmSearchViewControllerDelegate {
     private var filmsModel: FilmsModel? = nil
     private var filmsView: FilmView? = nil
     private var filmsTableViewDataSource: FilmsTableViewDataSource? = nil
@@ -87,6 +87,13 @@ class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewD
         navigationController?.pushViewController(filmReviewViewController, animated: false)
     }
     
+    func showSearchView() {
+        let filmSearchViewController = FilmSearchViewController()
+        filmSearchViewController.delegate = self
+        
+        navigationController?.pushViewController(filmSearchViewController, animated: false)
+    }
+    
     func onFinish() {
         navigationController?.popViewController(animated: false)
     }
@@ -113,7 +120,7 @@ class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewD
     }
     
     @objc private func didTapSearchButton() {
-        print("Search")
+        filmsModel?.didTapSearchButton()
     }
 }
 
