@@ -14,6 +14,7 @@ final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate,
     private var filmSearchModel: FilmSearchModel? = nil
     private var filmsView: FilmsView? = nil
     private var filmsTableViewDataSource: FilmsTableViewDataSource? = nil
+    private var loadingView: LoadingView? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +25,21 @@ final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate,
         
         view.backgroundColor = .white
         configureNavigationBar()
+    }
+    
+    func showLoadingView() {
+        let loadingView = LoadingView()
+        self.loadingView = loadingView
         
-        print("view did load")
+        view.addSubview(loadingView)
+        
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            loadingView.topAnchor.constraint(equalTo: view.topAnchor),
+            loadingView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            loadingView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            loadingView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     func showListFilmsView(from data: [Info]) {
@@ -36,6 +50,7 @@ final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate,
         let filmsView = FilmsView(tableViewDataSource: filmsTableViewDataSource, tableViewDelegate: filmsTableViewDataSource, identifierCell: filmsTableViewDataSource.reuseIdentifier)
         self.filmsView = filmsView
 
+        loadingView?.removeFromSuperview()
         view.addSubview(filmsView)
 
         filmsView.translatesAutoresizingMaskIntoConstraints = false
@@ -66,7 +81,7 @@ final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate,
         let searchView = UITextField()
         searchView.placeholder = "Поиск"
         searchView.font = UIFont.specialFont(size: 20, style: .regular)
-        searchView.textColor = .gray
+        searchView.textColor = .black
         searchView.textAlignment = .left
         searchView.returnKeyType = UIReturnKeyType.search
         searchView.delegate = filmSearchTextDelegate

@@ -15,6 +15,7 @@ final class FilmSearchModel {
     private let requestURL = "https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword="
     
     func didTapSearchButton() {
+        delegate?.showLoadingView()
         getListOfFilms()
     }
     
@@ -79,6 +80,7 @@ final class FilmSearchModel {
 }
 
 protocol FilmSearchModelDelegate: AnyObject {
+    func showLoadingView()
     func showListFilmsView(from: [Info])
     func notifyCompletion()
 }
