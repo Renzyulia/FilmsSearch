@@ -9,6 +9,7 @@ import UIKit
 
 final class FilmSearchViewController: UIViewController {
     weak var delegate: FilmSearchViewControllerDelegate?
+    weak var searchTextDelegate: FilmSearchTextDelegate? = nil
     
     private var filmSearchModel: FilmSearchModel? = nil
     
@@ -27,6 +28,16 @@ final class FilmSearchViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(didTapBackButton))
         
         navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "CustomColor")
+        
+        let searchView = UITextField()
+        let searchTextDelegate = FilmSearchTextDelegate()
+        searchView.placeholder = "Поиск"
+        searchView.font = UIFont.specialFont(size: 20, style: .regular)
+        searchView.textColor = .gray
+        searchView.textAlignment = .left
+        searchView.delegate = searchTextDelegate
+        
+        navigationItem.titleView = searchView
     }
     
     @objc private func didTapBackButton() {

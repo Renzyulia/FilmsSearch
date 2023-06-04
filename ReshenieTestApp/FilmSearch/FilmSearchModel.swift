@@ -9,6 +9,7 @@ import UIKit
 
 final class FilmSearchModel {
     weak var delegate: FilmSearchModelDelegate?
+    var searchWord: String? = nil
     
     func didTapBackButton() {
         delegate?.notifyCompletion()

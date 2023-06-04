@@ -24,6 +24,7 @@
 		A378E1AE2A2C9401001F7667 /* FilmSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A378E1AD2A2C9401001F7667 /* FilmSearchView.swift */; };
 		A378E1B02A2C9579001F7667 /* FilmSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A378E1AF2A2C9579001F7667 /* FilmSearchViewController.swift */; };
 		A378E1B22A2C95C2001F7667 /* FilmSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A378E1B12A2C95C2001F7667 /* FilmSearchModel.swift */; };
+		A378E1B42A2C9EA4001F7667 /* SearchTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A378E1B32A2C9EA4001F7667 /* SearchTextDelegate.swift */; };
 		A37F15B92A2B68870064A209 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A37F15B82A2B684E0064A209 /* Roboto-Black.ttf */; };
 		A3BB8C152A29F5D5000A6D0D /* ResponseStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB8C142A29F5D5000A6D0D /* ResponseStructure.swift */; };
 		A3BB8C172A2A09D2000A6D0D /* UIImageView+loadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB8C162A2A09D2000A6D0D /* UIImageView+loadImage.swift */; };
@@ -54,6 +55,7 @@
 		A378E1AD2A2C9401001F7667 /* FilmSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmSearchView.swift; sourceTree = "<group>"; };
 		A378E1AF2A2C9579001F7667 /* FilmSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmSearchViewController.swift; sourceTree = "<group>"; };
 		A378E1B12A2C95C2001F7667 /* FilmSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmSearchModel.swift; sourceTree = "<group>"; };
+		A378E1B32A2C9EA4001F7667 /* SearchTextDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextDelegate.swift; sourceTree = "<group>"; };
 		A37F15B82A2B684E0064A209 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Black.ttf"; path = "Roboto/Roboto-Black.ttf"; sourceTree = "<group>"; };
 		A3BB8C142A29F5D5000A6D0D /* ResponseStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseStructure.swift; sourceTree = "<group>"; };
 		A3BB8C162A2A09D2000A6D0D /* UIImageView+loadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+loadImage.swift"; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				A378E1AD2A2C9401001F7667 /* FilmSearchView.swift */,
 				A378E1AF2A2C9579001F7667 /* FilmSearchViewController.swift */,
 				A378E1B12A2C95C2001F7667 /* FilmSearchModel.swift */,
+				A378E1B32A2C9EA4001F7667 /* SearchTextDelegate.swift */,
 			);
 			path = FilmSearch;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A378E1B42A2C9EA4001F7667 /* SearchTextDelegate.swift in Sources */,
 				A34279942A2897D90092C43E /* FilmsView.swift in Sources */,
 				A3F180A52A2A32F4005E9D60 /* UIImageView+rotateView.swift in Sources */,
 				A337AD222A2B3F350046FE9C /* FilmReviewViewController.swift in Sources */,
