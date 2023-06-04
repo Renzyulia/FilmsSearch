@@ -7,7 +7,8 @@
 
 import UIKit
 
-final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate, FilmsTableViewDataSourceDelegate, LoadingErrorViewDelegate {
+final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate, FilmsTableViewDataSourceDelegate, LoadingErrorViewDelegate, FilmReviewViewControllerDelegate {
+    
     weak var delegate: FilmSearchViewControllerDelegate?
     var filmSearchTextDelegate: FilmSearchTextDelegate? = nil
     
@@ -105,6 +106,18 @@ final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate,
     }
     
     func didTapFilmAt(id: Int) {
+        filmSearchModel?.didTapFilmAt(id: id)
+    }
+    
+    func showFilmReviewView(id: Int) {
+        let filmReviewViewController = FilmReviewViewController(filmID: id)
+        filmReviewViewController.delegate = self
+        
+        navigationController?.pushViewController(filmReviewViewController, animated: false)
+    }
+    
+    func onFinish() {
+        navigationController?.popViewController(animated: false)
     }
     
     func notifyCompletion() {

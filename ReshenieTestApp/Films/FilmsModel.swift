@@ -7,6 +7,14 @@
 
 import UIKit
 
+protocol FilmsModelDelegate: AnyObject {
+    func showLoadingView()
+    func showFilmsView(from data: [Info])
+    func showLoadingErrorView()
+    func showFilmReviewView(id: Int)
+    func showSearchView()
+}
+
 final class FilmsModel {
     weak var delegate: FilmsModelDelegate?
     private let apiKey = "fb5368f8-d311-48d9-aadf-c3bd71bda8c5"
@@ -57,12 +65,4 @@ final class FilmsModel {
             }
         }).resume()
     }
-}
-
-protocol FilmsModelDelegate: AnyObject {
-    func showLoadingView()
-    func showFilmsView(from data: [Info])
-    func showLoadingErrorView()
-    func showFilmReviewView(id: Int)
-    func showSearchView()
 }

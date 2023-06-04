@@ -19,12 +19,16 @@ final class FilmSearchModel {
         getListOfFilms()
     }
     
-    func didTapBackButton() {
-        delegate?.notifyCompletion()
-    }
-    
     func didTapOnUpdateButton() {
         didTapSearchButton()
+    }
+    
+    func didTapFilmAt(id: Int) {
+        delegate?.showFilmReviewView(id: id)
+    }
+    
+    func didTapBackButton() {
+        delegate?.notifyCompletion()
     }
     
     private func transformSearchWord() -> String? {
@@ -87,6 +91,7 @@ protocol FilmSearchModelDelegate: AnyObject {
     func showLoadingErrorView()
     func showListFilmsView(from: [Info])
     func showFilmsNotFoundView()
+    func showFilmReviewView(id: Int)
     func notifyCompletion()
 }
 

@@ -42,6 +42,7 @@ final class FilmReviewViewController: UIViewController, FilmReviewModelDelegate,
         let loadingView = LoadingView()
         self.loadingView = loadingView
         
+        loadingErrorView?.removeFromSuperview()
         view.addSubview(loadingView)
 
         loadingView.translatesAutoresizingMaskIntoConstraints = false

@@ -31,11 +31,12 @@ class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewD
         let loadingView = LoadingView()
         self.loadingView = loadingView
         
+        loadingErrorView?.removeFromSuperview()
         view.addSubview(loadingView)
         
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            loadingView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            loadingView.topAnchor.constraint(equalTo: view.topAnchor),
             loadingView.leftAnchor.constraint(equalTo: view.leftAnchor),
             loadingView.rightAnchor.constraint(equalTo: view.rightAnchor),
             loadingView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -72,7 +73,7 @@ class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewD
         
         loadingErrorView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            loadingErrorView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            loadingErrorView.topAnchor.constraint(equalTo: view.topAnchor),
             loadingErrorView.leftAnchor.constraint(equalTo: view.leftAnchor),
             loadingErrorView.rightAnchor.constraint(equalTo: view.rightAnchor),
             loadingErrorView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
