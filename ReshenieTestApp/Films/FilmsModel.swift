@@ -25,6 +25,10 @@ final class FilmsModel {
         delegate?.showSearchView()
     }
     
+    func didTapOnUpdateButton() {
+        viewDidLoad()
+    }
+    
     private func getListOfFilms() {
         var request = URLRequest(url: URL(string: requestURL)!)
         request.httpMethod = "GET"

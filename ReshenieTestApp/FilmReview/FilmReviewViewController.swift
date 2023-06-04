@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FilmReviewViewController: UIViewController, FilmReviewModelDelegate {
+final class FilmReviewViewController: UIViewController, FilmReviewModelDelegate, LoadingErrorViewDelegate {
     let filmID: Int
     weak var delegate: FilmReviewViewControllerDelegate?
     
@@ -56,6 +56,7 @@ final class FilmReviewViewController: UIViewController, FilmReviewModelDelegate 
     func showLoadingErrorView() {
         let loadingErrorView = LoadingErrorView()
         self.loadingErrorView = loadingErrorView
+        loadingErrorView.delegate = self
         
         loadingView?.removeFromSuperview()
         view.addSubview(loadingErrorView)
@@ -83,6 +84,10 @@ final class FilmReviewViewController: UIViewController, FilmReviewModelDelegate 
             filmReviewView.rightAnchor.constraint(equalTo: view.rightAnchor),
             filmReviewView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    func didTapOnUpdateButton() {
+        filmReviewModel?.didTapOnUpdateButton()
     }
     
     func notifyCompletion() {

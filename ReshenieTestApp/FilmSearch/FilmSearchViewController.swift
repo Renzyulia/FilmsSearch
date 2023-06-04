@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate, FilmsTableViewDataSourceDelegate {
+final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate, FilmsTableViewDataSourceDelegate, LoadingErrorViewDelegate {
     weak var delegate: FilmSearchViewControllerDelegate?
     var filmSearchTextDelegate: FilmSearchTextDelegate? = nil
     
@@ -15,6 +15,8 @@ final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate,
     private var filmsView: FilmsView? = nil
     private var filmsTableViewDataSource: FilmsTableViewDataSource? = nil
     private var loadingView: LoadingView? = nil
+    private var filmsNotFoundView: FilmsNotFoundView? = nil
+    private var loadingErrorView: LoadingErrorView? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,9 @@ final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate,
         let loadingView = LoadingView()
         self.loadingView = loadingView
         
+        filmsNotFoundView?.removeFromSuperview()
+        loadingErrorView?.removeFromSuperview()
+        filmsView?.removeFromSuperview()
         view.addSubview(loadingView)
         
         loadingView.translatesAutoresizingMaskIntoConstraints = false
@@ -39,6 +44,39 @@ final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate,
             loadingView.leftAnchor.constraint(equalTo: view.leftAnchor),
             loadingView.rightAnchor.constraint(equalTo: view.rightAnchor),
             loadingView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    func showLoadingErrorView() {
+        let loadingErrorView = LoadingErrorView()
+        self.loadingErrorView = loadingErrorView
+        loadingErrorView.delegate = self
+        
+        loadingView?.removeFromSuperview()
+        view.addSubview(loadingErrorView)
+        
+        loadingErrorView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            loadingErrorView.topAnchor.constraint(equalTo: view.topAnchor),
+            loadingErrorView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            loadingErrorView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            loadingErrorView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    func showFilmsNotFoundView() {
+        let filmsNotFoundView = FilmsNotFoundView()
+        self.filmsNotFoundView = filmsNotFoundView
+        
+        loadingView?.removeFromSuperview()
+        view.addSubview(filmsNotFoundView)
+        
+        filmsNotFoundView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            filmsNotFoundView.topAnchor.constraint(equalTo: view.topAnchor),
+            filmsNotFoundView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            filmsNotFoundView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            filmsNotFoundView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
@@ -60,6 +98,10 @@ final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate,
             filmsView.rightAnchor.constraint(equalTo: view.rightAnchor),
             filmsView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    func didTapOnUpdateButton() {
+        filmSearchModel?.didTapSearchButton()
     }
     
     func didTapFilmAt(id: Int) {

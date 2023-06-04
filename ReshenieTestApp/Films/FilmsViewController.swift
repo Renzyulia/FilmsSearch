@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewDataSourceDelegate, FilmReviewViewControllerDelegate, FilmSearchViewControllerDelegate {
+class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewDataSourceDelegate, FilmReviewViewControllerDelegate, FilmSearchViewControllerDelegate, LoadingErrorViewDelegate {
     private var filmsModel: FilmsModel? = nil
     private var filmsView: FilmsView? = nil
     private var filmsTableViewDataSource: FilmsTableViewDataSource? = nil
@@ -50,6 +50,7 @@ class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewD
         let filmsView = FilmsView(tableViewDataSource: filmsTableViewDataSource, tableViewDelegate: filmsTableViewDataSource, identifierCell: filmsTableViewDataSource.reuseIdentifier)
         self.filmsView = filmsView
 
+        loadingView?.removeFromSuperview()
         view.addSubview(filmsView)
 
         filmsView.translatesAutoresizingMaskIntoConstraints = false
@@ -64,6 +65,7 @@ class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewD
     func showLoadingErrorView() {
         let loadingErrorView = LoadingErrorView()
         self.loadingErrorView = loadingErrorView
+        loadingErrorView.delegate = self
         
         loadingView?.removeFromSuperview()
         view.addSubview(loadingErrorView)
@@ -75,6 +77,10 @@ class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewD
             loadingErrorView.rightAnchor.constraint(equalTo: view.rightAnchor),
             loadingErrorView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    func didTapOnUpdateButton() {
+        filmsModel?.didTapOnUpdateButton()
     }
     
     func didTapFilmAt(id: Int) {

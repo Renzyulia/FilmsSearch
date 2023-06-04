@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol LoadingErrorViewDelegate: AnyObject {
+    func didTapOnUpdateButton()
+}
+
 final class LoadingErrorView: UIView {
+    weak var delegate: LoadingErrorViewDelegate?
+    
     private let errorView = UIImageView()
     private let updateButton = UpdateButton()
     
@@ -36,6 +42,8 @@ final class LoadingErrorView: UIView {
     }
     
     private func configureUpdateButton() {
+        updateButton.addTarget(self, action: #selector(didTapOnUpdateButton), for: .touchUpInside)
+        
         addSubview(updateButton)
         
         updateButton.translatesAutoresizingMaskIntoConstraints = false
@@ -44,6 +52,10 @@ final class LoadingErrorView: UIView {
             updateButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -117),
             updateButton.topAnchor.constraint(equalTo: errorView.bottomAnchor, constant: 21)
         ])
+    }
+    
+    @objc private func didTapOnUpdateButton() {
+        delegate?.didTapOnUpdateButton()
     }
 }
 

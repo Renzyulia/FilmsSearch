@@ -27,6 +27,10 @@ final class FilmReviewModel {
         delegate?.notifyCompletion()
     }
     
+    func didTapOnUpdateButton() {
+        viewDidLoad()
+    }
+    
     private func getFilmData() {
         var request = URLRequest(url: URL(string: "\(requestURL)" + "\(filmID)")!)
         request.httpMethod = "GET"

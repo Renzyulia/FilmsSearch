@@ -23,6 +23,10 @@ final class FilmSearchModel {
         delegate?.notifyCompletion()
     }
     
+    func didTapOnUpdateButton() {
+        didTapSearchButton()
+    }
+    
     private func transformSearchWord() -> String? {
         return searchWord?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
     }
@@ -40,7 +44,7 @@ final class FilmSearchModel {
           do {
             guard let data = data else {
                 DispatchQueue.main.async {
-//                    self?.delegate?.showLoadingErrorView()
+                    self?.delegate?.showLoadingErrorView()
                 }
                 return
             }
@@ -70,10 +74,9 @@ final class FilmSearchModel {
                 self?.delegate?.showListFilmsView(from: info)
             }
           } catch {
-              print(error)
-//              DispatchQueue.main.async {
-//                  self?.delegate?.showLoadingErrorView()
-//              }
+              DispatchQueue.main.async {
+                  self?.delegate?.showFilmsNotFoundView()
+              }
             }
         }).resume()
     }
@@ -81,7 +84,9 @@ final class FilmSearchModel {
 
 protocol FilmSearchModelDelegate: AnyObject {
     func showLoadingView()
+    func showLoadingErrorView()
     func showListFilmsView(from: [Info])
+    func showFilmsNotFoundView()
     func notifyCompletion()
 }
 
