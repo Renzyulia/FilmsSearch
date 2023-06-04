@@ -9,7 +9,7 @@ import UIKit
 
 class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewDataSourceDelegate, FilmReviewViewControllerDelegate, FilmSearchViewControllerDelegate {
     private var filmsModel: FilmsModel? = nil
-    private var filmsView: FilmView? = nil
+    private var filmsView: FilmsView? = nil
     private var filmsTableViewDataSource: FilmsTableViewDataSource? = nil
     private var loadingView: LoadingView? = nil
     private var loadingErrorView: LoadingErrorView? = nil
@@ -48,6 +48,7 @@ class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewD
         filmsTableViewDataSource.delegate = self
 
         let filmsView = FilmsView(tableViewDataSource: filmsTableViewDataSource, tableViewDelegate: filmsTableViewDataSource, identifierCell: filmsTableViewDataSource.reuseIdentifier)
+        self.filmsView = filmsView
 
         view.addSubview(filmsView)
 
@@ -64,7 +65,7 @@ class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewD
         let loadingErrorView = LoadingErrorView()
         self.loadingErrorView = loadingErrorView
         
-        loadingView?.removeFromSuperview() // ??
+        loadingView?.removeFromSuperview()
         view.addSubview(loadingErrorView)
         
         loadingErrorView.translatesAutoresizingMaskIntoConstraints = false

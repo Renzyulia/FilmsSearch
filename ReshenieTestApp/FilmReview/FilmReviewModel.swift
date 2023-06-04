@@ -12,7 +12,7 @@ final class FilmReviewModel {
     
     private let filmID: Int
     private let apiKey = "fb5368f8-d311-48d9-aadf-c3bd71bda8c5"
-    private var requestURL = "https://kinopoiskapiunofficial.tech/api/v2.2/films/"
+    private let requestURL = "https://kinopoiskapiunofficial.tech/api/v2.2/films/"
     
     init(filmID: Int) {
         self.filmID = filmID
