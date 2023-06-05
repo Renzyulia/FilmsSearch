@@ -42,6 +42,7 @@ final class FilmsView: UIView {
     private func configureTableView() {
         tableView.delegate = tableViewDelegate
         tableView.dataSource = tableViewDataSource
+        tableView.separatorColor = .clear
         tableView.register(FilmsCell.self, forCellReuseIdentifier: identifierCell)
         
         addSubview(tableView)
@@ -77,16 +78,17 @@ final class FilmsCell: UITableViewCell {
         self.filmView = filmView
         
         backgroundColor = .none
+        selectionStyle = .none
         
         contentView.addSubview(filmView)
         
         filmView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            filmView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 7),
-            filmView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 15),
-            filmView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -7),
-            filmView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -15)
+            filmView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            filmView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
+            filmView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            filmView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16)
         ])
     }
 }
@@ -119,16 +121,18 @@ final class FilmView: UIView {
     
     private func setupShadow() {
         layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 0)
-        layer.shadowOpacity = 0.4
+        layer.shadowOffset = CGSize(width: 0, height: 5)
+        layer.shadowOpacity = 0.25
         layer.shadowRadius = 10
         layer.masksToBounds = false
-        layer.cornerRadius = 15.0
+        layer.cornerRadius = 15
     }
     
     private func configureIconView() {
         iconView.loadImage(with: iconUrl)
-        iconView.contentMode = .scaleAspectFit
+        iconView.contentMode = .scaleAspectFill
+        iconView.layer.masksToBounds = true
+        iconView.layer.cornerRadius = 5
         
         addSubview(iconView)
         

@@ -11,9 +11,9 @@ final class FilmsTableViewDataSource: NSObject, UITableViewDataSource, UITableVi
     weak var delegate: FilmsTableViewDataSourceDelegate?
     let reuseIdentifier = "Cell"
     
-    private let films: [Info]
+    private let films: [FilmInfo]
 
-    init(films: [Info]) {
+    init(films: [FilmInfo]) {
         self.films = films
     }
     
@@ -25,9 +25,11 @@ final class FilmsTableViewDataSource: NSObject, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? FilmsCell
 
         guard let cell = cell else { return UITableViewCell() }
+        
         cell.configureCell(
             title: films[indexPath.row].nameRu,
-            genre: FilmGenre(name: films[indexPath.row].genres[0].genre, year: films[indexPath.row].year),
+            genre: FilmGenre(name: films[indexPath.row].genres[0].genre.lowercased().capitalized,
+                             year: films[indexPath.row].year),
             iconUrl: films[indexPath.row].posterUrlPreview
         )
         return cell

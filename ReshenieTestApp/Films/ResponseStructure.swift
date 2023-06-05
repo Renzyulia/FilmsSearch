@@ -9,10 +9,10 @@ import UIKit
 
 struct Model: Decodable {
     let total: Int
-    let items: [Info]
+    let items: [FilmInfo]
 }
 
-struct Info: Decodable {
+struct FilmInfo: Decodable {
     let kinopoiskId: Int
     let nameRu: String
     let year: Int

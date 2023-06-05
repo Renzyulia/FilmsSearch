@@ -43,7 +43,7 @@ class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewD
         ])
     }
     
-    func showFilmsView(from data: [Info]) {
+    func showFilmsView(from data: [FilmInfo]) {
         let filmsTableViewDataSource = FilmsTableViewDataSource(films: data)
         self.filmsTableViewDataSource = filmsTableViewDataSource
         filmsTableViewDataSource.delegate = self

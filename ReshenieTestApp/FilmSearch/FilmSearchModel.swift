@@ -57,17 +57,17 @@ final class FilmSearchModel {
             let responseModel = try jsonDecoder.decode(FindedFilms.self, from: data) //??
             
             DispatchQueue.main.async {
-                var info = [Info]()
+                var info = [FilmInfo]()
                 
                 for film in responseModel.films {
                     if film.genres.isEmpty {
-                        info.append(Info(kinopoiskId: film.filmId,
+                        info.append(FilmInfo(kinopoiskId: film.filmId,
                                          nameRu: film.nameRu,
                                          year: Int(film.year) ?? 0,
                                          posterUrlPreview: film.posterUrlPreview,
                                          genres: [Genre(genre: "Unknown")])) //как это реализовать в методе с популярными фильмами
                     } else {
-                        info.append(Info(kinopoiskId: film.filmId,
+                        info.append(FilmInfo(kinopoiskId: film.filmId,
                                          nameRu: film.nameRu,
                                          year: Int(film.year) ?? 0,
                                          posterUrlPreview: film.posterUrlPreview,
@@ -89,7 +89,7 @@ final class FilmSearchModel {
 protocol FilmSearchModelDelegate: AnyObject {
     func showLoadingView()
     func showLoadingErrorView()
-    func showListFilmsView(from: [Info])
+    func showListFilmsView(from: [FilmInfo])
     func showFilmsNotFoundView()
     func showFilmReviewView(id: Int)
     func notifyCompletion()

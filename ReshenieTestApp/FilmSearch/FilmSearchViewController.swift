@@ -81,7 +81,7 @@ final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate,
         ])
     }
     
-    func showListFilmsView(from data: [Info]) {
+    func showListFilmsView(from data: [FilmInfo]) {
         let filmsTableViewDataSource = FilmsTableViewDataSource(films: data)
         self.filmsTableViewDataSource = filmsTableViewDataSource
         filmsTableViewDataSource.delegate = self
@@ -125,10 +125,6 @@ final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate,
     }
     
     private func configureNavigationBar() {
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(didTapBackButton))
-        
-        navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "CustomColor")
-        
         let filmSearchTextDelegate = FilmSearchTextDelegate()
         self.filmSearchTextDelegate = filmSearchTextDelegate
         filmSearchTextDelegate.delegate = filmSearchModel

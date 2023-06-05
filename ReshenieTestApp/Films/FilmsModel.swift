@@ -9,7 +9,7 @@ import UIKit
 
 protocol FilmsModelDelegate: AnyObject {
     func showLoadingView()
-    func showFilmsView(from data: [Info])
+    func showFilmsView(from data: [FilmInfo])
     func showLoadingErrorView()
     func showFilmReviewView(id: Int)
     func showSearchView()
@@ -45,9 +45,10 @@ final class FilmsModel {
       
         URLSession.shared.dataTask(with: request, completionHandler: { [weak self] data, response, error -> Void in
           do {
+            guard let self = self else { return }
             guard let data = data else {
                 DispatchQueue.main.async {
-                    self?.delegate?.showLoadingErrorView()
+                    self.delegate?.showLoadingErrorView()
                 }
                 return
             }
@@ -56,13 +57,21 @@ final class FilmsModel {
             let responseModel = try jsonDecoder.decode(Model.self, from: data)
             
             DispatchQueue.main.async {
-                self?.delegate?.showFilmsView(from: responseModel.items)
+                let listOfFilms = self.sortListOfFilms(films: responseModel.items)
+                self.delegate?.showFilmsView(from: listOfFilms)
             }
           } catch {
               DispatchQueue.main.async {
-                  self?.delegate?.showLoadingErrorView()
+                  guard let self = self else { return }
+                  self.delegate?.showLoadingErrorView()
               }
             }
         }).resume()
+    }
+    
+    private func sortListOfFilms(films: [FilmInfo]) -> [FilmInfo] {
+        films.sorted(by: { (firstFilm: FilmInfo, secondFilm: FilmInfo) -> Bool in
+            return firstFilm.year < secondFilm.year
+        })
     }
 }
