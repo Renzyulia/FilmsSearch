@@ -24,12 +24,14 @@ final class FilmsView: UIView {
             tableView.delegate = newValue
         }
     }
+    
     private let identifierCell: String
     private let tableView = UITableView()
     
     init(tableViewDataSource: UITableViewDataSource, tableViewDelegate: UITableViewDelegate, identifierCell: String) {
         self.identifierCell = identifierCell
         super.init(frame: .zero)
+        
         self.tableViewDelegate = tableViewDelegate
         self.tableViewDataSource = tableViewDataSource
         configureTableView()
@@ -83,7 +85,6 @@ final class FilmsCell: UITableViewCell {
         contentView.addSubview(filmView)
         
         filmView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             filmView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             filmView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
@@ -177,4 +178,3 @@ final class FilmView: UIView {
         ])
     }
 }
-

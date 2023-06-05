@@ -52,13 +52,14 @@ final class FilmReviewView: UIView {
         scrollView.addSubview(contentView)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: topAnchor),
             scrollView.rightAnchor.constraint(equalTo: rightAnchor),
             scrollView.leftAnchor.constraint(equalTo: leftAnchor),
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+        
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),

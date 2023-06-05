@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A30CB3B12A2B452D00700827 /* ResponseStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30CB3B02A2B452D00700827 /* ResponseStruct.swift */; };
+		A30CB3B12A2B452D00700827 /* FilmReviewResponseStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30CB3B02A2B452D00700827 /* FilmReviewResponseStructure.swift */; };
 		A31F19632A2E27C900AE5B7B /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31F19622A2E27C900AE5B7B /* DataManager.swift */; };
+		A31F19652A2E591A00AE5B7B /* FilmSearchResponseStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31F19642A2E591A00AE5B7B /* FilmSearchResponseStructure.swift */; };
 		A32954972A2CF24C004282DD /* FilmsNotFoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32954962A2CF24C004282DD /* FilmsNotFoundView.swift */; };
 		A337AD1E2A2B2C550046FE9C /* FilmReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337AD1D2A2B2C550046FE9C /* FilmReviewView.swift */; };
 		A337AD222A2B3F350046FE9C /* FilmReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337AD212A2B3F350046FE9C /* FilmReviewViewController.swift */; };
@@ -27,7 +28,7 @@
 		A378E1B22A2C95C2001F7667 /* FilmSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A378E1B12A2C95C2001F7667 /* FilmSearchModel.swift */; };
 		A378E1B42A2C9EA4001F7667 /* SearchTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A378E1B32A2C9EA4001F7667 /* SearchTextDelegate.swift */; };
 		A37F15B92A2B68870064A209 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A37F15B82A2B684E0064A209 /* Roboto-Black.ttf */; };
-		A3BB8C152A29F5D5000A6D0D /* ResponseStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB8C142A29F5D5000A6D0D /* ResponseStructure.swift */; };
+		A3BB8C152A29F5D5000A6D0D /* FilmsResponseStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB8C142A29F5D5000A6D0D /* FilmsResponseStructure.swift */; };
 		A3BB8C172A2A09D2000A6D0D /* UIImageView+loadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB8C162A2A09D2000A6D0D /* UIImageView+loadImage.swift */; };
 		A3BB8C1A2A2A0A07000A6D0D /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB8C192A2A0A07000A6D0D /* ImageManager.swift */; };
 		A3F180A32A2A2299005E9D60 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F180A22A2A2299005E9D60 /* LoadingView.swift */; };
@@ -36,8 +37,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A30CB3B02A2B452D00700827 /* ResponseStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseStruct.swift; sourceTree = "<group>"; };
+		A30CB3B02A2B452D00700827 /* FilmReviewResponseStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmReviewResponseStructure.swift; sourceTree = "<group>"; };
 		A31F19622A2E27C900AE5B7B /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		A31F19642A2E591A00AE5B7B /* FilmSearchResponseStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmSearchResponseStructure.swift; sourceTree = "<group>"; };
 		A32954962A2CF24C004282DD /* FilmsNotFoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsNotFoundView.swift; sourceTree = "<group>"; };
 		A337AD1D2A2B2C550046FE9C /* FilmReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmReviewView.swift; sourceTree = "<group>"; };
 		A337AD212A2B3F350046FE9C /* FilmReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmReviewViewController.swift; sourceTree = "<group>"; };
@@ -53,13 +55,13 @@
 		A342799A2A289F120092C43E /* UIFont+CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+CustomFont.swift"; sourceTree = "<group>"; };
 		A342799E2A28B7A20092C43E /* FilmsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsModel.swift; sourceTree = "<group>"; };
 		A34279A02A28B7F80092C43E /* FilmsTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsTableViewDataSource.swift; sourceTree = "<group>"; };
-		A34279A22A28C7810092C43E /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "Roboto/Roboto-Medium.ttf"; sourceTree = "<group>"; };
-		A34279A42A28C78E0092C43E /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "Roboto/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		A34279A22A28C7810092C43E /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		A34279A42A28C78E0092C43E /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		A378E1AF2A2C9579001F7667 /* FilmSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmSearchViewController.swift; sourceTree = "<group>"; };
 		A378E1B12A2C95C2001F7667 /* FilmSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmSearchModel.swift; sourceTree = "<group>"; };
 		A378E1B32A2C9EA4001F7667 /* SearchTextDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextDelegate.swift; sourceTree = "<group>"; };
-		A37F15B82A2B684E0064A209 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Black.ttf"; path = "Roboto/Roboto-Black.ttf"; sourceTree = "<group>"; };
-		A3BB8C142A29F5D5000A6D0D /* ResponseStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseStructure.swift; sourceTree = "<group>"; };
+		A37F15B82A2B684E0064A209 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
+		A3BB8C142A29F5D5000A6D0D /* FilmsResponseStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsResponseStructure.swift; sourceTree = "<group>"; };
 		A3BB8C162A2A09D2000A6D0D /* UIImageView+loadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+loadImage.swift"; sourceTree = "<group>"; };
 		A3BB8C192A2A0A07000A6D0D /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		A3F180A22A2A2299005E9D60 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -95,13 +97,23 @@
 			path = DataManager;
 			sourceTree = "<group>";
 		};
+		A31F19682A2E5A8A00AE5B7B /* CustomFonts */ = {
+			isa = PBXGroup;
+			children = (
+				A37F15B82A2B684E0064A209 /* Roboto-Black.ttf */,
+				A34279A42A28C78E0092C43E /* Roboto-Regular.ttf */,
+				A34279A22A28C7810092C43E /* Roboto-Medium.ttf */,
+			);
+			path = CustomFonts;
+			sourceTree = "<group>";
+		};
 		A337AD1C2A2B2BEE0046FE9C /* FilmReview */ = {
 			isa = PBXGroup;
 			children = (
 				A337AD1D2A2B2C550046FE9C /* FilmReviewView.swift */,
 				A337AD212A2B3F350046FE9C /* FilmReviewViewController.swift */,
 				A337AD232A2B40390046FE9C /* FilmReviewModel.swift */,
-				A30CB3B02A2B452D00700827 /* ResponseStruct.swift */,
+				A30CB3B02A2B452D00700827 /* FilmReviewResponseStructure.swift */,
 			);
 			path = FilmReview;
 			sourceTree = "<group>";
@@ -125,6 +137,8 @@
 		A342797E2A288F010092C43E /* ReshenieTestApp */ = {
 			isa = PBXGroup;
 			children = (
+				A342797F2A288F010092C43E /* AppDelegate.swift */,
+				A34279812A288F010092C43E /* SceneDelegate.swift */,
 				A31F19612A2E27B000AE5B7B /* DataManager */,
 				A3BB8C182A2A09F5000A6D0D /* ImageManager */,
 				A34279992A289EE90092C43E /* Extension */,
@@ -132,14 +146,10 @@
 				A3F180A82A2A65E7005E9D60 /* Films */,
 				A337AD1C2A2B2BEE0046FE9C /* FilmReview */,
 				A378E1AC2A2C93C4001F7667 /* FilmSearch */,
-				A342797F2A288F010092C43E /* AppDelegate.swift */,
-				A34279812A288F010092C43E /* SceneDelegate.swift */,
+				A31F19682A2E5A8A00AE5B7B /* CustomFonts */,
 				A34279882A288F050092C43E /* Assets.xcassets */,
 				A342798A2A288F050092C43E /* LaunchScreen.storyboard */,
 				A342798D2A288F050092C43E /* Info.plist */,
-				A34279A22A28C7810092C43E /* Roboto-Medium.ttf */,
-				A34279A42A28C78E0092C43E /* Roboto-Regular.ttf */,
-				A37F15B82A2B684E0064A209 /* Roboto-Black.ttf */,
 			);
 			path = ReshenieTestApp;
 			sourceTree = "<group>";
@@ -161,6 +171,7 @@
 				A378E1B12A2C95C2001F7667 /* FilmSearchModel.swift */,
 				A378E1B32A2C9EA4001F7667 /* SearchTextDelegate.swift */,
 				A32954962A2CF24C004282DD /* FilmsNotFoundView.swift */,
+				A31F19642A2E591A00AE5B7B /* FilmSearchResponseStructure.swift */,
 			);
 			path = FilmSearch;
 			sourceTree = "<group>";
@@ -180,7 +191,7 @@
 				A342799E2A28B7A20092C43E /* FilmsModel.swift */,
 				A34279932A2897D90092C43E /* FilmsView.swift */,
 				A34279A02A28B7F80092C43E /* FilmsTableViewDataSource.swift */,
-				A3BB8C142A29F5D5000A6D0D /* ResponseStructure.swift */,
+				A3BB8C142A29F5D5000A6D0D /* FilmsResponseStructure.swift */,
 			);
 			path = Films;
 			sourceTree = "<group>";
@@ -269,13 +280,14 @@
 				A3F180A32A2A2299005E9D60 /* LoadingView.swift in Sources */,
 				A34279842A288F010092C43E /* FilmsViewController.swift in Sources */,
 				A342799F2A28B7A20092C43E /* FilmsModel.swift in Sources */,
-				A3BB8C152A29F5D5000A6D0D /* ResponseStructure.swift in Sources */,
+				A31F19652A2E591A00AE5B7B /* FilmSearchResponseStructure.swift in Sources */,
+				A3BB8C152A29F5D5000A6D0D /* FilmsResponseStructure.swift in Sources */,
 				A34279802A288F010092C43E /* AppDelegate.swift in Sources */,
 				A337AD242A2B40390046FE9C /* FilmReviewModel.swift in Sources */,
 				A34279822A288F010092C43E /* SceneDelegate.swift in Sources */,
 				A34279A12A28B7F80092C43E /* FilmsTableViewDataSource.swift in Sources */,
 				A337AD1E2A2B2C550046FE9C /* FilmReviewView.swift in Sources */,
-				A30CB3B12A2B452D00700827 /* ResponseStruct.swift in Sources */,
+				A30CB3B12A2B452D00700827 /* FilmReviewResponseStructure.swift in Sources */,
 				A31F19632A2E27C900AE5B7B /* DataManager.swift in Sources */,
 				A3BB8C172A2A09D2000A6D0D /* UIImageView+loadImage.swift in Sources */,
 				A378E1B22A2C95C2001F7667 /* FilmSearchModel.swift in Sources */,

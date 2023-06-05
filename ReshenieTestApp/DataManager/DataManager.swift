@@ -8,8 +8,8 @@
 import UIKit
 
 enum Result<T: Decodable> {
-case success(T)
-case failure
+    case success(T)
+    case failure
 }
 
 final class DataManager {

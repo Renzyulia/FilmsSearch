@@ -7,6 +7,15 @@
 
 import UIKit
 
+protocol FilmSearchModelDelegate: AnyObject {
+    func showLoadingView()
+    func showLoadingErrorView()
+    func showListFilmsView(from: [FilmInfo])
+    func showFilmsNotFoundView()
+    func showFilmReviewView(id: Int)
+    func notifyCompletion()
+}
+
 final class FilmSearchModel {
     weak var delegate: FilmSearchModelDelegate?
     var searchWord: String? = nil
@@ -51,7 +60,7 @@ final class FilmSearchModel {
                                              nameRu: film.nameRu,
                                              year: Int(film.year) ?? 0,
                                              posterUrlPreview: film.posterUrlPreview,
-                                             genres: [Genre(genre: "Unknown")])) //как это реализовать в методе с популярными фильмами
+                                             genres: [Genre(genre: "Unknown")]))
                         } else {
                             filmIinfo.append(FilmInfo(kinopoiskId: film.filmId,
                                              nameRu: film.nameRu,
@@ -69,71 +78,5 @@ final class FilmSearchModel {
                 self.delegate?.showLoadingErrorView()
             }
         })
-        
-//        var request = URLRequest(url: URL(string: "\(requestURL)" + "\(searchWord)")!)
-//        request.httpMethod = "GET"
-//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.addValue(apiKey, forHTTPHeaderField: "X-API-KEY")
-//
-//        URLSession.shared.dataTask(with: request, completionHandler: { [weak self] data, response, error -> Void in
-//          do {
-//            guard let data = data else {
-//                DispatchQueue.main.async {
-//                    self?.delegate?.showLoadingErrorView()
-//                }
-//                return
-//            }
-//
-//            let jsonDecoder = JSONDecoder()
-//            let responseModel = try jsonDecoder.decode(FindedFilms.self, from: data) //??
-//
-//            DispatchQueue.main.async {
-//                var info = [FilmInfo]()
-//
-//                for film in responseModel.films {
-//                    if film.genres.isEmpty {
-//                        info.append(FilmInfo(kinopoiskId: film.filmId,
-//                                         nameRu: film.nameRu,
-//                                         year: Int(film.year) ?? 0,
-//                                         posterUrlPreview: film.posterUrlPreview,
-//                                         genres: [Genre(genre: "Unknown")])) //как это реализовать в методе с популярными фильмами
-//                    } else {
-//                        info.append(FilmInfo(kinopoiskId: film.filmId,
-//                                         nameRu: film.nameRu,
-//                                         year: Int(film.year) ?? 0,
-//                                         posterUrlPreview: film.posterUrlPreview,
-//                                         genres: film.genres))
-//                    }
-//                }
-//
-//                self?.delegate?.showListFilmsView(from: info)
-//            }
-//          } catch {
-//              DispatchQueue.main.async {
-//                  self?.delegate?.showFilmsNotFoundView()
-//              }
-//            }
-//        }).resume()
     }
-}
-
-protocol FilmSearchModelDelegate: AnyObject {
-    func showLoadingView()
-    func showLoadingErrorView()
-    func showListFilmsView(from: [FilmInfo])
-    func showFilmsNotFoundView()
-    func showFilmReviewView(id: Int)
-    func notifyCompletion()
-}
-
-struct FindedFilms: Decodable {
-    let films: [Films]
-}
-
-struct Films: Decodable {
-    let filmId: Int
-    let nameRu: String
-    let year: String
-    let genres: [Genre]
-    let posterUrlPreview: URL
 }

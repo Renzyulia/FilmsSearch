@@ -12,6 +12,7 @@ final class FilmsNotFoundView: UIView {
     
     init() {
         super.init(frame: .zero)
+        
         backgroundColor = .white
         configureNotFoundLabel()
     }
@@ -41,4 +42,3 @@ final class FilmsNotFoundView: UIView {
         ])
     }
 }
-

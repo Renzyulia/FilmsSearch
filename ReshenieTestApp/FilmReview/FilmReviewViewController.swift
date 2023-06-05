@@ -7,9 +7,13 @@
 
 import UIKit
 
+protocol FilmReviewViewControllerDelegate: AnyObject {
+    func onFinish()
+}
+
 final class FilmReviewViewController: UIViewController, FilmReviewModelDelegate, LoadingErrorViewDelegate {
-    let filmID: Int
     weak var delegate: FilmReviewViewControllerDelegate?
+    let filmID: Int
     
     private var filmReviewModel: FilmReviewModel? = nil
     private var filmReviewView: FilmReviewView? = nil
@@ -104,8 +108,4 @@ final class FilmReviewViewController: UIViewController, FilmReviewModelDelegate,
     @objc private func didTapBackButton() {
         filmReviewModel?.didTapBackButton()
     }
-}
-
-protocol FilmReviewViewControllerDelegate: AnyObject {
-    func onFinish()
 }

@@ -25,7 +25,6 @@ final class FilmsTableViewDataSource: NSObject, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? FilmsCell
 
         guard let cell = cell else { return UITableViewCell() }
-        
         cell.configureCell(
             title: films[indexPath.row].nameRu,
             genre: FilmGenre(name: films[indexPath.row].genres[0].genre.lowercased().capitalized,

@@ -107,7 +107,6 @@ class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewD
     }
     
     private func configureNavigationBar() {
-        // MARK: - configure title
         let titleLabel = UILabel()
         let title = NSAttributedString(
             string: "Фильмы",
@@ -118,10 +117,8 @@ class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewD
         )
         
         titleLabel.attributedText = title
-        
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
         
-        // MARK: - configure searchButton
         let searchIcon = UIImage(named: "SearchIcon")?.withTintColor(UIColor(named: "CustomColor")!, renderingMode: .alwaysOriginal)
         let searchButton = UIBarButtonItem(image: searchIcon, style: .plain, target: self, action: #selector(didTapSearchButton))
         navigationItem.rightBarButtonItem = searchButton

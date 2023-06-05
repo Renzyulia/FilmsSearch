@@ -17,6 +17,7 @@ protocol FilmsModelDelegate: AnyObject {
 
 final class FilmsModel {
     weak var delegate: FilmsModelDelegate?
+    
     private let requestPath = "api/v2.2/films/premieres?year=2023&month=JUNE"
     
     func viewDidLoad() {
@@ -51,36 +52,6 @@ final class FilmsModel {
                 self.delegate?.showLoadingErrorView()
             }
         })
-        
-//        var request = URLRequest(url: URL(string: requestURL)!)
-//        request.httpMethod = "GET"
-//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.addValue(apiKey, forHTTPHeaderField: "X-API-KEY")
-//
-//        URLSession.shared.dataTask(with: request, completionHandler: { [weak self] data, response, error -> Void in
-//          do {
-//            guard let self = self else { return }
-//            guard let data = data else {
-//                DispatchQueue.main.async {
-//                    self.delegate?.showLoadingErrorView()
-//                }
-//                return
-//            }
-//
-//            let jsonDecoder = JSONDecoder()
-//            let responseModel = try jsonDecoder.decode(Model.self, from: data)
-//
-//            DispatchQueue.main.async {
-//                let listOfFilms = self.sortListOfFilms(films: responseModel.items)
-//                self.delegate?.showFilmsView(from: listOfFilms)
-//            }
-//          } catch {
-//              DispatchQueue.main.async {
-//                  guard let self = self else { return }
-//                  self.delegate?.showLoadingErrorView()
-//              }
-//            }
-//        }).resume()
     }
     
     private func sortListOfFilms(films: [FilmInfo]) -> [FilmInfo] {
