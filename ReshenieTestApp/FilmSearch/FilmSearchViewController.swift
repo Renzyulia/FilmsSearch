@@ -125,7 +125,7 @@ final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate,
     }
     
     private func configureNavigationBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(didTapBackButton))
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(didTapBackButton))
         
         navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "CustomColor")
         
@@ -141,7 +141,12 @@ final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate,
         searchView.returnKeyType = UIReturnKeyType.search
         searchView.delegate = filmSearchTextDelegate
         
-        navigationItem.titleView = searchView
+        let backButton = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(didTapBackButton))
+        backButton.tintColor = UIColor(named: "CustomColor")
+        
+        let searchButton = UIBarButtonItem(customView: searchView)
+        
+        navigationItem.leftBarButtonItems = [backButton, searchButton]
     }
     
     @objc private func didTapBackButton() {
