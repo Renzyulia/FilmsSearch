@@ -17,8 +17,7 @@ protocol FilmsModelDelegate: AnyObject {
 
 final class FilmsModel {
     weak var delegate: FilmsModelDelegate?
-    private let apiKey = "fb5368f8-d311-48d9-aadf-c3bd71bda8c5"
-    private let requestURL = "https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres?year=2023&month=JUNE"
+    private let requestPath = "api/v2.2/films/premieres?year=2023&month=JUNE"
     
     func viewDidLoad() {
         delegate?.showLoadingView()
@@ -38,35 +37,50 @@ final class FilmsModel {
     }
     
     private func getListOfFilms() {
-        var request = URLRequest(url: URL(string: requestURL)!)
-        request.httpMethod = "GET"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(apiKey, forHTTPHeaderField: "X-API-KEY")
-      
-        URLSession.shared.dataTask(with: request, completionHandler: { [weak self] data, response, error -> Void in
-          do {
+        DataManager.shared.loadData(path: requestPath, completion: { [weak self] (result: Result<Model>) in
             guard let self = self else { return }
-            guard let data = data else {
-                DispatchQueue.main.async {
+            switch result {
+            case .success(let data):
+                if !data.items.isEmpty {
+                    let listOfFilms = self.sortListOfFilms(films: data.items)
+                    self.delegate?.showFilmsView(from: listOfFilms)
+                } else {
                     self.delegate?.showLoadingErrorView()
                 }
-                return
+            case .failure:
+                self.delegate?.showLoadingErrorView()
             }
-              
-            let jsonDecoder = JSONDecoder()
-            let responseModel = try jsonDecoder.decode(Model.self, from: data)
-            
-            DispatchQueue.main.async {
-                let listOfFilms = self.sortListOfFilms(films: responseModel.items)
-                self.delegate?.showFilmsView(from: listOfFilms)
-            }
-          } catch {
-              DispatchQueue.main.async {
-                  guard let self = self else { return }
-                  self.delegate?.showLoadingErrorView()
-              }
-            }
-        }).resume()
+        })
+        
+//        var request = URLRequest(url: URL(string: requestURL)!)
+//        request.httpMethod = "GET"
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.addValue(apiKey, forHTTPHeaderField: "X-API-KEY")
+//
+//        URLSession.shared.dataTask(with: request, completionHandler: { [weak self] data, response, error -> Void in
+//          do {
+//            guard let self = self else { return }
+//            guard let data = data else {
+//                DispatchQueue.main.async {
+//                    self.delegate?.showLoadingErrorView()
+//                }
+//                return
+//            }
+//
+//            let jsonDecoder = JSONDecoder()
+//            let responseModel = try jsonDecoder.decode(Model.self, from: data)
+//
+//            DispatchQueue.main.async {
+//                let listOfFilms = self.sortListOfFilms(films: responseModel.items)
+//                self.delegate?.showFilmsView(from: listOfFilms)
+//            }
+//          } catch {
+//              DispatchQueue.main.async {
+//                  guard let self = self else { return }
+//                  self.delegate?.showLoadingErrorView()
+//              }
+//            }
+//        }).resume()
     }
     
     private func sortListOfFilms(films: [FilmInfo]) -> [FilmInfo] {

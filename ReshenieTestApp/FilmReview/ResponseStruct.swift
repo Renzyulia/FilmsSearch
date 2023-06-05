@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Review: Decodable {
+struct FilmDetails: Decodable {
     let nameRu: String
     let posterUrl: URL
     let year: Int
