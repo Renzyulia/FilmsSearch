@@ -8,7 +8,13 @@
 import UIKit
 
 class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewDataSourceDelegate, FilmReviewViewControllerDelegate, FilmSearchViewControllerDelegate, LoadingErrorViewDelegate {
-    private var filmsModel: FilmsModel? = nil
+    
+    private lazy var filmsModel = {
+        let model = FilmsModel(dataManager: .shared)
+        model.delegate = self
+        return model
+    }()
+    
     private var filmsView: FilmsView? = nil
     private var filmsTableViewDataSource: FilmsTableViewDataSource? = nil
     private var loadingView: LoadingView? = nil
@@ -19,10 +25,6 @@ class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewD
         
         configureNavigationBar()
         view.backgroundColor = .white
-        
-        let filmsModel = FilmsModel()
-        self.filmsModel = filmsModel
-        filmsModel.delegate = self
 
         filmsModel.viewDidLoad()
     }
@@ -48,7 +50,7 @@ class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewD
         self.filmsTableViewDataSource = filmsTableViewDataSource
         filmsTableViewDataSource.delegate = self
 
-        let filmsView = FilmsView(tableViewDataSource: filmsTableViewDataSource, tableViewDelegate: filmsTableViewDataSource, identifierCell: filmsTableViewDataSource.reuseIdentifier)
+        let filmsView = FilmsView(dataSource: filmsTableViewDataSource)
         self.filmsView = filmsView
 
         loadingView?.removeFromSuperview()
@@ -81,11 +83,11 @@ class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewD
     }
     
     func didTapOnUpdateButton() {
-        filmsModel?.didTapOnUpdateButton()
+        filmsModel.didTapOnUpdateButton()
     }
     
     func didTapFilmAt(id: Int) {
-        filmsModel?.didTapFilmAt(id: id)
+        filmsModel.didTapFilmAt(id: id)
     }
     
     func showFilmReviewView(id: Int) {
@@ -119,13 +121,13 @@ class FilmsViewController: UIViewController, FilmsModelDelegate, FilmsTableViewD
         titleLabel.attributedText = title
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
         
-        let searchIcon = UIImage(named: "SearchIcon")?.withTintColor(UIColor(named: "CustomColor")!, renderingMode: .alwaysOriginal)
+        let searchIcon = UIImage.searchIcon.withTintColor(.customColor, renderingMode: .alwaysOriginal)
         let searchButton = UIBarButtonItem(image: searchIcon, style: .plain, target: self, action: #selector(didTapSearchButton))
         navigationItem.rightBarButtonItem = searchButton
     }
     
     @objc private func didTapSearchButton() {
-        filmsModel?.didTapSearchButton()
+        filmsModel.didTapSearchButton()
     }
 }
 

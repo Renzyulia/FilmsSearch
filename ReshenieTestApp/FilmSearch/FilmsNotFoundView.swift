@@ -26,7 +26,7 @@ final class FilmsNotFoundView: UIView {
         notFoundLabel.textAlignment = .center
         notFoundLabel.textColor = .white
         notFoundLabel.font = UIFont.specialFont(size: 16, style: .regular)
-        notFoundLabel.backgroundColor = UIColor(named: "CustomColor")
+        notFoundLabel.backgroundColor = .customColor
         notFoundLabel.layer.masksToBounds = true
         notFoundLabel.layer.cornerRadius = 20
         

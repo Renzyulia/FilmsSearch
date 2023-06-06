@@ -18,7 +18,11 @@ protocol FilmsModelDelegate: AnyObject {
 final class FilmsModel {
     weak var delegate: FilmsModelDelegate?
     
-    private let requestPath = "api/v2.2/films/premieres?year=2023&month=JUNE"
+    private let dataManager: DataManager
+    
+    init(dataManager: DataManager) {
+        self.dataManager = dataManager
+    }
     
     func viewDidLoad() {
         delegate?.showLoadingView()
@@ -38,12 +42,14 @@ final class FilmsModel {
     }
     
     private func getListOfFilms() {
-        DataManager.shared.loadData(path: requestPath, completion: { [weak self] (result: Result<Model>) in
+        let requestPath = "v2.2/films/premieres"
+        let arguments = ["year": "2023", "month": "JUNE"]
+        dataManager.loadData(path: requestPath, arguments: arguments) { [weak self] (result: Result<Films, Error>) in
             guard let self = self else { return }
             switch result {
             case .success(let data):
                 if !data.items.isEmpty {
-                    let listOfFilms = self.sortListOfFilms(films: data.items)
+                    let listOfFilms = self.sortedByYear(data.items)
                     self.delegate?.showFilmsView(from: listOfFilms)
                 } else {
                     self.delegate?.showLoadingErrorView()
@@ -51,12 +57,12 @@ final class FilmsModel {
             case .failure:
                 self.delegate?.showLoadingErrorView()
             }
-        })
+        }
     }
     
-    private func sortListOfFilms(films: [FilmInfo]) -> [FilmInfo] {
-        films.sorted(by: { (firstFilm: FilmInfo, secondFilm: FilmInfo) -> Bool in
+    private func sortedByYear(_ films: [FilmInfo]) -> [FilmInfo] {
+        return films.sorted { firstFilm, secondFilm in
             return firstFilm.year < secondFilm.year
-        })
+        }
     }
 }

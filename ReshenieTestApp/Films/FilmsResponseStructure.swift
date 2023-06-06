@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Model: Decodable {
+struct Films: Decodable {
     let total: Int
     let items: [FilmInfo]
 }

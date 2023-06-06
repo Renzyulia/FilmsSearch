@@ -18,7 +18,7 @@ final class FilmSearchTextDelegate: NSObject, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField.text != " " {
+        if textField.text?.trimmingCharacters(in: .whitespaces).isEmpty == false {
             delegate?.searchWord = textField.text
         }
     }

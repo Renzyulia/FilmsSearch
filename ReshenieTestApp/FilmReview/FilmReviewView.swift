@@ -15,7 +15,7 @@ final class FilmReviewView: UIView {
     let countries: [String]
     let year: Int
     
-    private let posterView = UIImageView()
+    private let posterView = RemoteImageView()
     private let titleLabel = UILabel()
     private let reviewLabel = UILabel()
     private let genresLabel = UILabel()
@@ -45,7 +45,7 @@ final class FilmReviewView: UIView {
     }
     
     private func configureScrollView() {
-        scrollView.backgroundColor = UIColor(named: "BackgroundColor")
+        scrollView.backgroundColor = nil
         scrollView.contentInsetAdjustmentBehavior = .never
         
         addSubview(scrollView)
@@ -147,7 +147,7 @@ final class FilmReviewView: UIView {
         )
         
         let secondPart = NSAttributedString(
-            string: "\(genres.joined(separator: ", "))",
+            string: genres.joined(separator: ", "),
             attributes: [
                 .font: UIFont.specialFont(size: 14, style: .regular),
                 .foregroundColor: UIColor.gray
@@ -168,7 +168,7 @@ final class FilmReviewView: UIView {
         )
         
         let secondPart = NSAttributedString(
-            string: "\(countries.joined(separator: ", "))",
+            string: countries.joined(separator: ", "),
             attributes: [
                 .font: UIFont.specialFont(size: 14, style: .regular),
                 .foregroundColor: UIColor.gray
@@ -189,7 +189,7 @@ final class FilmReviewView: UIView {
         )
         
         let secondPart = NSAttributedString(
-            string: "\(self.year)",
+            string: String(self.year),
             attributes: [
                 .font: UIFont.specialFont(size: 14, style: .regular),
                 .foregroundColor: UIColor.gray

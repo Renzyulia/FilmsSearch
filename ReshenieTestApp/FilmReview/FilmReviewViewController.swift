@@ -13,12 +13,18 @@ protocol FilmReviewViewControllerDelegate: AnyObject {
 
 final class FilmReviewViewController: UIViewController, FilmReviewModelDelegate, LoadingErrorViewDelegate {
     weak var delegate: FilmReviewViewControllerDelegate?
-    let filmID: Int
     
-    private var filmReviewModel: FilmReviewModel? = nil
-    private var filmReviewView: FilmReviewView? = nil
-    private var loadingView: LoadingView? = nil
-    private var loadingErrorView: LoadingErrorView? = nil
+    private let filmID: Int
+    
+    private lazy var filmReviewModel = {
+        let model = FilmReviewModel(filmID: filmID, dataManager: DataManager.shared)
+        model.delegate = self
+        return model
+    }()
+    
+    private var filmReviewView: FilmReviewView?
+    private var loadingView: LoadingView?
+    private var loadingErrorView: LoadingErrorView?
     
     init(filmID: Int) {
         self.filmID = filmID
@@ -34,10 +40,6 @@ final class FilmReviewViewController: UIViewController, FilmReviewModelDelegate,
         
         configureNavigationBar()
         view.backgroundColor = .white
-        
-        let filmReviewModel = FilmReviewModel(filmID: filmID)
-        self.filmReviewModel = filmReviewModel
-        filmReviewModel.delegate = self
         
         filmReviewModel.viewDidLoad()
     }
@@ -92,7 +94,7 @@ final class FilmReviewViewController: UIViewController, FilmReviewModelDelegate,
     }
     
     func didTapOnUpdateButton() {
-        filmReviewModel?.didTapOnUpdateButton()
+        filmReviewModel.didTapOnUpdateButton()
     }
     
     func notifyCompletion() {
@@ -100,12 +102,12 @@ final class FilmReviewViewController: UIViewController, FilmReviewModelDelegate,
     }
     
     private func configureNavigationBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(didTapBackButton))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: .backIcon, style: .plain, target: self, action: #selector(didTapBackButton))
         
-        navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "CustomColor")
+        navigationItem.leftBarButtonItem?.tintColor = .customColor
     }
     
     @objc private func didTapBackButton() {
-        filmReviewModel?.didTapBackButton()
+        filmReviewModel.didTapBackButton()
     }
 }

@@ -16,7 +16,12 @@ final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate,
     weak var delegate: FilmSearchViewControllerDelegate?
     var filmSearchTextDelegate: FilmSearchTextDelegate? = nil
     
-    private var filmSearchModel: FilmSearchModel? = nil
+    private lazy var filmSearchModel = {
+        let model = FilmSearchModel(dataManager: DataManager.shared)
+        model.delegate = self
+        return model
+    }()
+    
     private var filmsView: FilmsView? = nil
     private var filmsTableViewDataSource: FilmsTableViewDataSource? = nil
     private var loadingView: LoadingView? = nil
@@ -25,10 +30,6 @@ final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let filmSearchModel = FilmSearchModel()
-        self.filmSearchModel = filmSearchModel
-        filmSearchModel.delegate = self
         
         view.backgroundColor = .white
         configureNavigationBar()
@@ -90,7 +91,7 @@ final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate,
         self.filmsTableViewDataSource = filmsTableViewDataSource
         filmsTableViewDataSource.delegate = self
 
-        let filmsView = FilmsView(tableViewDataSource: filmsTableViewDataSource, tableViewDelegate: filmsTableViewDataSource, identifierCell: filmsTableViewDataSource.reuseIdentifier)
+        let filmsView = FilmsView(dataSource: filmsTableViewDataSource)
         self.filmsView = filmsView
 
         loadingView?.removeFromSuperview()
@@ -106,11 +107,11 @@ final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate,
     }
     
     func didTapOnUpdateButton() {
-        filmSearchModel?.didTapSearchButton()
+        filmSearchModel.didTapSearchButton()
     }
     
     func didTapFilmAt(id: Int) {
-        filmSearchModel?.didTapFilmAt(id: id)
+        filmSearchModel.didTapFilmAt(id: id)
     }
     
     func showFilmReviewView(id: Int) {
@@ -143,13 +144,13 @@ final class FilmSearchViewController: UIViewController, FilmSearchModelDelegate,
         
         let searchButton = UIBarButtonItem(customView: searchView)
         
-        let backButton = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(didTapBackButton))
-        backButton.tintColor = UIColor(named: "CustomColor")
+        let backButton = UIBarButtonItem(image: .backIcon, style: .plain, target: self, action: #selector(didTapBackButton))
+        backButton.tintColor = .customColor
         
         navigationItem.leftBarButtonItems = [backButton, searchButton]
     }
     
     @objc private func didTapBackButton() {
-        filmSearchModel?.didTapBackButton()
+        filmSearchModel.didTapBackButton()
     }
 }

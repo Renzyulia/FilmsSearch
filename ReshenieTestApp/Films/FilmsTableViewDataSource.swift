@@ -7,14 +7,22 @@
 
 import UIKit
 
-final class FilmsTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
+protocol FilmsTableViewDataSourceDelegate: AnyObject {
+    func didTapFilmAt(id: Int)
+}
+
+final class FilmsTableViewDataSource: NSObject, ConfiguringDataSource {
     weak var delegate: FilmsTableViewDataSourceDelegate?
-    let reuseIdentifier = "Cell"
     
+    private let reuseIdentifier = "Cell"
     private let films: [FilmInfo]
 
     init(films: [FilmInfo]) {
         self.films = films
+    }
+    
+    func didAttach(to tableView: UITableView) {
+        tableView.register(FilmViewCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -22,14 +30,13 @@ final class FilmsTableViewDataSource: NSObject, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? FilmsCell
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? FilmViewCell
         guard let cell = cell else { return UITableViewCell() }
-        cell.configureCell(
-            title: films[indexPath.row].nameRu,
-            genre: FilmGenre(name: films[indexPath.row].genres[0].genre.lowercased().capitalized,
-                             year: films[indexPath.row].year),
-            iconUrl: films[indexPath.row].posterUrlPreview
+        let film = films[indexPath.row]
+        cell.configure(
+            title: film.nameRu,
+            genre: FilmGenre(name: film.genres[0].genre.lowercased().capitalized, year: film.year),
+            posterUrl: film.posterUrlPreview
         )
         return cell
     }
@@ -42,8 +49,4 @@ final class FilmsTableViewDataSource: NSObject, UITableViewDataSource, UITableVi
         let id = films[indexPath.row].kinopoiskId
         delegate?.didTapFilmAt(id: id)
     }
-}
-
-protocol FilmsTableViewDataSourceDelegate: AnyObject {
-    func didTapFilmAt(id: Int)
 }

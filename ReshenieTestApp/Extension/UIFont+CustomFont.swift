@@ -7,6 +7,12 @@
 
 import UIKit
 
+enum Style {
+    case regular
+    case medium
+    case bold
+}
+
 extension UIFont {
     static func specialFont(size: CGFloat, style: Style) -> UIFont {
         switch style {
@@ -15,10 +21,4 @@ extension UIFont {
         case .bold: return UIFont(name: "Roboto-Black", size: size)!
         }
     }
-}
-
-enum Style {
-    case regular
-    case medium
-    case bold
 }

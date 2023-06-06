@@ -8,10 +8,11 @@
 import UIKit
 
 struct FilmDetails: Decodable {
-    let nameRu: String
+    let nameRu: String?
+    let nameEn: String?
     let posterUrl: URL
     let year: Int
-    let description: String
+    let description: String?
     let countries: [Countries]
     let genres: [ListGenres]
 }

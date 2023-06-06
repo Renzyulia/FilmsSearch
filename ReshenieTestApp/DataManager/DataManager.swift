@@ -7,39 +7,50 @@
 
 import UIKit
 
-enum Result<T: Decodable> {
-    case success(T)
-    case failure
-}
-
 final class DataManager {
+    
+    enum LoadingError: Error {
+        case missingDataError
+    }
+    
     static let shared = DataManager()
     
     private let apiKey = "fb5368f8-d311-48d9-aadf-c3bd71bda8c5"
-    private let host = "https://kinopoiskapiunofficial.tech/"
+    private let host = URL(string: "https://kinopoiskapiunofficial.tech/api")!
     
     private init() {}
     
-    func loadData<T: Decodable>(path: String, completion: @escaping (Result<T>) -> Void) {
-        var request = URLRequest(url: URL(string: host + path)!)
+    func loadData<Model: Decodable>(path: String, arguments: [String: String]? = nil, queue: DispatchQueue = .main, completion: @escaping (Result<Model, Error>) -> Void) {
+        var url = host.appending(path: path)
+        if let arguments = arguments {
+            let queryItems = arguments.map { item in
+                return URLQueryItem(name: item.key, value: item.value)
+            }
+            url = url.appending(queryItems: queryItems)
+        }
+        var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue(apiKey, forHTTPHeaderField: "X-API-KEY")
         
-        URLSession.shared.dataTask(with: request, completionHandler: { data, response, error -> Void in
-          do {
-            guard let data = data, error == nil else { return }
-            let jsonDecoder = JSONDecoder()
-            let responseModel = try jsonDecoder.decode(T.self, from: data)
-            
-            DispatchQueue.main.async {
-                completion(.success(responseModel))
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            let result: Result<Model, Error>
+            if let error = error {
+                result = .failure(error)
+            } else if let data = data {
+                do {
+                    let jsonDecoder = JSONDecoder()
+                    let responseModel = try jsonDecoder.decode(Model.self, from: data)
+                    result = .success(responseModel)
+                } catch {
+                    result = .failure(error)
+                }
+            } else {
+                result = .failure(LoadingError.missingDataError)
             }
-          } catch {
-              DispatchQueue.main.async {
-                  completion(.failure)
-              }
+            queue.async {
+                completion(result)
             }
-        }).resume()
+        }.resume()
     }
 }

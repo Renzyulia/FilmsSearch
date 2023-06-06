@@ -18,10 +18,11 @@ final class FilmReviewModel {
     weak var delegate: FilmReviewModelDelegate?
     
     private let filmID: Int
-    private let requestPath = "api/v2.2/films/"
+    private let dataManager: DataManager
     
-    init(filmID: Int) {
+    init(filmID: Int, dataManager: DataManager) {
         self.filmID = filmID
+        self.dataManager = dataManager
     }
     
     func viewDidLoad() {
@@ -38,31 +39,45 @@ final class FilmReviewModel {
     }
     
     private func getFilmDetails() {
-        DataManager.shared.loadData(path: requestPath + String(filmID), completion: { [weak self] (result: Result<FilmDetails>) in
+        let path = "v2.2/films/\(filmID)"
+        dataManager.loadData(path: path) { [weak self] (result: Result<FilmDetails, Error>) in
             guard let self = self else { return }
             switch result {
-            case .success(let data):
-                var listGenres = [String]()
-                var countries = [String]()
-                    
-                for genre in data.genres {
-                    listGenres.append(genre.genre)
-                }
-                    
-                for country in data.countries {
-                    countries.append(country.country)
-                }
-                    
-                self.delegate?.showFilmReviewView(
-                    posterUrl: data.posterUrl,
-                    title: data.nameRu,
-                    review: data.description,
-                    genres: listGenres,
-                    countries: countries,
-                    year: data.year)
+            case .success(let filmDetails):
+                self.handleLoadedFilm(filmDetails)
             case .failure:
                 self.delegate?.showLoadingErrorView()
             }
-        })
+        }
+    }
+    
+    private func handleLoadedFilm(_ film: FilmDetails) {
+        var listGenres = [String]()
+        var countries = [String]()
+            
+        for genre in film.genres {
+            listGenres.append(genre.genre)
+        }
+            
+        for country in film.countries {
+            countries.append(country.country)
+        }
+        
+        var filmTitle: String {
+            return film.nameRu ?? film.nameEn ?? "Без названия"
+        }
+        
+        var description: String {
+            return film.description ?? "Описание отсутствует"
+        }
+            
+        delegate?.showFilmReviewView(
+            posterUrl: film.posterUrl,
+            title: filmTitle,
+            review: description,
+            genres: listGenres,
+            countries: countries,
+            year: film.year
+        )
     }
 }

@@ -7,13 +7,14 @@
 
 import UIKit
 
-struct FindedFilms: Decodable {
-    let films: [Films]
+struct FilmSearchResult: Decodable {
+    let films: [Film]
 }
 
-struct Films: Decodable {
+struct Film: Decodable {
     let filmId: Int
-    let nameRu: String
+    let nameRu: String?
+    let nameEn: String?
     let year: String
     let genres: [Genre]
     let posterUrlPreview: URL

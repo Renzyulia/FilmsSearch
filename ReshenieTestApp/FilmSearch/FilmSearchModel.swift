@@ -20,7 +20,11 @@ final class FilmSearchModel {
     weak var delegate: FilmSearchModelDelegate?
     var searchWord: String? = nil
     
-    private let requestPath = "api/v2.1/films/search-by-keyword?keyword="
+    private let dataManager: DataManager
+    
+    init(dataManager: DataManager) {
+        self.dataManager = dataManager
+    }
     
     func didTapSearchButton() {
         delegate?.showLoadingView()
@@ -39,44 +43,52 @@ final class FilmSearchModel {
         delegate?.notifyCompletion()
     }
     
-    private func transformSearchWord() -> String? {
-        return searchWord?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-    }
-    
     private func getListOfFilms() {
-        guard searchWord != nil else { return }
-        guard let searchWord = transformSearchWord() else { return }
+        guard let searchWord = searchWord else { return }
+        let path = "v2.1/films/search-by-keyword"
+        let arguments = ["keyword": searchWord]
         
-        DataManager.shared.loadData(path: requestPath + searchWord, completion: { [weak self] (result: Result<FindedFilms>) in
+        dataManager.loadData(path: path, arguments: arguments) { [weak self] (result: Result<FilmSearchResult, Error>) in
             guard let self = self else { return }
             switch result {
-            case .success(let data):
-                if !data.films.isEmpty {
-                    var filmIinfo = [FilmInfo]()
-
-                    for film in data.films {
-                        if film.genres.isEmpty {
-                            filmIinfo.append(FilmInfo(kinopoiskId: film.filmId,
-                                             nameRu: film.nameRu,
-                                             year: Int(film.year) ?? 0,
-                                             posterUrlPreview: film.posterUrlPreview,
-                                             genres: [Genre(genre: "Unknown")]))
-                        } else {
-                            filmIinfo.append(FilmInfo(kinopoiskId: film.filmId,
-                                             nameRu: film.nameRu,
-                                             year: Int(film.year) ?? 0,
-                                             posterUrlPreview: film.posterUrlPreview,
-                                             genres: film.genres))
-                        }
-                    }
-
-                    self.delegate?.showListFilmsView(from: filmIinfo)
-                } else {
-                    self.delegate?.showFilmsNotFoundView()
-                }
+            case .success(let result):
+                self.handleSearchResult(result)
             case .failure:
                 self.delegate?.showLoadingErrorView()
             }
-        })
+        }
+    }
+    
+    private func handleSearchResult(_ result: FilmSearchResult) {
+        if !result.films.isEmpty {
+            var filmInfo = [FilmInfo]()
+
+            for film in result.films {
+                let genres: [Genre]
+                if film.genres.isEmpty {
+                    genres = [Genre(genre: "Неизвестный")]
+                } else {
+                    genres = film.genres
+                }
+                
+                var filmTitle: String {
+                    return film.nameRu ?? film.nameEn ?? "Без названия"
+                }
+                
+                filmInfo.append(
+                    FilmInfo(
+                        kinopoiskId: film.filmId,
+                        nameRu: filmTitle,
+                        year: Int(film.year) ?? 0,
+                        posterUrlPreview: film.posterUrlPreview,
+                        genres: genres
+                    )
+                )
+            }
+
+            delegate?.showListFilmsView(from: filmInfo)
+        } else {
+            delegate?.showFilmsNotFoundView()
+        }
     }
 }

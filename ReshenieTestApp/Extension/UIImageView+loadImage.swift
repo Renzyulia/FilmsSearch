@@ -7,10 +7,17 @@
 
 import UIKit
 
-extension UIImageView {
+final class RemoteImageView: UIImageView {
+    
+    private var currentUrl: URL?
+    
     func loadImage(with url: URL) {
+        currentUrl = url
         ImageManager.shared.loadImage(url: url) { [weak self] image in
-            self?.image = image
+            guard let self = self else { return }
+            if self.currentUrl == url {
+                self.image = image
+            }
         }
     }
 }
